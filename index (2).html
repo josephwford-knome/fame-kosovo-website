@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FAME — Future Albanian Minds Empowered</title>
+<meta name="description" content="FAME — Future Albanian Minds Empowered. An adaptive learning, wellbeing, and data-sovereignty platform built for Albanian-speaking children in Kosovo, Albania, and the diaspora. From hunger to recognition." />
+
+<!-- Social preview -->
+<meta property="og:title" content="FAME — Future Albanian Minds Empowered" />
+<meta property="og:description" content="An adaptive learning, wellbeing, and data-sovereignty platform for Albanian-speaking children. Built in Kosovo. Open to the world." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="./assets/fame_logo.jpg" />
+
+<link rel="icon" type="image/png" href="./assets/favicon.png" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --cream:    #F5F1EC;
+    --cream-2:  #ECE4D8;
+    --cream-3:  #E3D9C9;
+    --ink:      #15110F;
+    --ink-2:    #2A2420;
+    --muted:    #5C534D;
+    --red:      #CE1126;
+    --red-deep: #9E1420;
+    --red-dark: #6E0F18;
+    --gold:     #BE9B4E;
+    --gold-2:   #D8B872;
+    --line:     rgba(21,17,15,.12);
+    --line-2:   rgba(21,17,15,.07);
+
+    --maxw: 1180px;
+    --pad: clamp(20px, 5vw, 64px);
+
+    --f-display: "Archivo", system-ui, sans-serif;
+    --f-body: "Inter", system-ui, sans-serif;
+    --f-serif: "Fraunces", Georgia, serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--f-body);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--pad); }
+
+  /* ---------- type ---------- */
+  .eyebrow{
+    font-family:var(--f-display);
+    font-weight:700;
+    font-size:.72rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--red-deep);
+    display:inline-flex;
+    align-items:center;
+    gap:.7em;
+    margin:0 0 1.1rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px;height:2px;background:var(--gold);
+    display:inline-block;
+  }
+  .eyebrow.center{ justify-content:center; }
+
+  h1,h2,h3{ font-family:var(--f-display); font-weight:800; line-height:1.04; letter-spacing:-.015em; margin:0; }
+  h2.head{ font-size:clamp(1.9rem, 4.2vw, 3.1rem); }
+  h3{ font-weight:700; letter-spacing:-.01em; }
+  .lead{ font-size:clamp(1.05rem,1.6vw,1.28rem); color:var(--muted); line-height:1.55; max-width:62ch; }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    font-family:var(--f-display);
+    font-weight:700;
+    font-size:.93rem;
+    letter-spacing:.01em;
+    display:inline-flex; align-items:center; gap:.6em;
+    padding:.92em 1.5em;
+    border-radius:999px;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .25s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    white-space:nowrap;
+  }
+  .btn .arw{ transition:transform .2s ease; }
+  .btn:hover .arw{ transform:translateX(3px); }
+  .btn-primary{
+    background:var(--red); color:#fff;
+    box-shadow:0 10px 26px -10px rgba(206,17,38,.7);
+  }
+  .btn-primary:hover{ background:var(--red-deep); transform:translateY(-2px); box-shadow:0 16px 34px -12px rgba(206,17,38,.75); }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn-ghost:hover{ border-color:var(--ink); transform:translateY(-2px); }
+  .btn-gold{ background:var(--gold); color:var(--ink); }
+  .btn-gold:hover{ background:var(--gold-2); transform:translateY(-2px); }
+
+  :focus-visible{ outline:3px solid var(--red); outline-offset:3px; border-radius:4px; }
+
+  /* ---------- header ---------- */
+  header.nav{
+    position:fixed; inset:0 0 auto 0; z-index:50;
+    transition:background .3s ease, box-shadow .3s ease, border-color .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.nav.scrolled{
+    background:rgba(245,241,236,.86);
+    backdrop-filter:saturate(140%) blur(10px);
+    border-bottom-color:var(--line);
+    box-shadow:0 6px 24px -18px rgba(21,17,15,.6);
+  }
+  .nav-in{ display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .brand{ display:flex; align-items:center; gap:.6rem; }
+  .brand img{ height:40px; width:auto; }
+  .brand .wm{ font-family:var(--f-display); font-weight:900; font-size:1.35rem; letter-spacing:.02em; }
+  .brand .wm .a{ color:var(--red); }
+  .nav-links{ display:flex; align-items:center; gap:2rem; }
+  .nav-links a{ font-family:var(--f-display); font-weight:600; font-size:.86rem; letter-spacing:.02em; color:var(--ink-2); transition:color .2s ease; }
+  .nav-links a:hover{ color:var(--red); }
+  .nav-links .btn{ padding:.62em 1.15em; }
+  .menu-btn{ display:none; }
+
+  /* ---------- hero ---------- */
+  .hero{ position:relative; padding:7.5rem 0 4.2rem; text-align:center; }
+  .hero-card{
+    max-width:760px; margin:1.3rem auto 0;
+    border-radius:18px; overflow:hidden;
+    box-shadow:0 40px 80px -34px rgba(21,17,15,.5), 0 6px 18px -10px rgba(21,17,15,.25);
+    border:1px solid rgba(255,255,255,.5);
+  }
+  .hero-card img{ width:100%; }
+  .hero .lead{ margin:2rem auto 0; text-align:center; }
+  .hero-cta{ display:flex; gap:.9rem; justify-content:center; flex-wrap:wrap; margin-top:2rem; }
+  .hero-meta{
+    margin-top:1.7rem; font-size:.82rem; color:var(--muted);
+    display:flex; gap:1.4rem; justify-content:center; flex-wrap:wrap; align-items:center;
+    font-weight:500;
+  }
+  .hero-meta b{ color:var(--ink); font-weight:600; }
+  .dot{ width:5px;height:5px;border-radius:50%;background:var(--gold); display:inline-block; }
+
+  /* ---------- sections ---------- */
+  section{ position:relative; }
+  .band{ padding:clamp(4.5rem,9vw,7rem) 0; }
+  .band.cream2{ background:var(--cream-2); }
+  .rule-top{ border-top:1px solid var(--line-2); }
+
+  /* manifesto */
+  .manifesto{ display:grid; grid-template-columns:1fr; gap:2rem; max-width:880px; }
+  .manifesto p{ color:var(--muted); font-size:1.1rem; max-width:64ch; margin:.4rem 0 0; }
+  .pullquote{
+    font-family:var(--f-serif); font-style:italic; font-weight:500;
+    font-size:clamp(1.6rem,3.6vw,2.6rem); line-height:1.22; color:var(--ink);
+    letter-spacing:-.01em; margin:1.4rem 0; max-width:20ch;
+  }
+  .pullquote .accent{ color:var(--red); }
+  .byline{ font-family:var(--f-display); font-weight:600; font-size:.82rem; letter-spacing:.04em; color:var(--muted); text-transform:uppercase; }
+  .byline b{ color:var(--ink); }
+
+  /* pillars (Learn/Flourish/Own) */
+  .sec-head{ max-width:60ch; margin-bottom:3rem; }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+  .card{
+    background:var(--cream); border:1px solid var(--line); border-radius:16px;
+    padding:2rem 1.7rem; transition:transform .22s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .cream2 .card{ background:#fbf8f3; }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 26px 50px -28px rgba(21,17,15,.4); border-color:transparent; }
+  .card .num{
+    font-family:var(--f-display); font-weight:900; font-size:.8rem; letter-spacing:.04em;
+    color:var(--red); border:1.5px solid var(--red); width:40px;height:40px;border-radius:50%;
+    display:flex; align-items:center; justify-content:center; margin-bottom:1.2rem;
+  }
+  .card h3{ font-size:1.35rem; margin-bottom:.55rem; }
+  .card p{ color:var(--muted); margin:0; font-size:.98rem; }
+  .card .tag{ margin-top:1.1rem; font-size:.76rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--gold); }
+
+  /* passport spotlight */
+  .split{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(2rem,5vw,4.5rem); align-items:center; }
+  .passport-copy h2{ margin-bottom:1.2rem; }
+  .passport-copy .lead{ margin-bottom:1.6rem; }
+  .checks{ list-style:none; margin:0; padding:0; display:grid; gap:.85rem; }
+  .checks li{ display:flex; gap:.8rem; align-items:flex-start; font-size:.98rem; color:var(--ink-2); }
+  .checks svg{ flex:0 0 auto; margin-top:2px; }
+
+  /* passport card visual */
+  .ppcard{
+    background:linear-gradient(160deg,#1b1613 0%, #221a16 55%, #2c1d18 100%);
+    color:var(--cream); border-radius:20px; padding:1.6rem 1.6rem 1.4rem;
+    box-shadow:0 40px 80px -30px rgba(21,17,15,.65); position:relative; overflow:hidden;
+    border:1px solid rgba(190,155,78,.28);
+  }
+  .ppcard::after{
+    content:""; position:absolute; right:-60px; top:-50px; width:240px;height:240px;
+    background:radial-gradient(circle, rgba(206,17,38,.32), transparent 68%); pointer-events:none;
+  }
+  .pp-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:1.3rem; position:relative; }
+  .pp-brand{ display:flex; align-items:center; gap:.6rem; }
+  .pp-brand .eg{ height:32px; width:auto; }
+  .pp-brand .t{ font-family:var(--f-display); font-weight:800; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-2); line-height:1.3; }
+  .seal{ width:34px;height:34px;border-radius:50%;border:1.5px solid var(--gold); color:var(--gold-2);
+    display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;font-family:var(--f-display);letter-spacing:.02em;}
+  .pp-name{ font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,241,236,.55); margin-bottom:.15rem; }
+  .pp-name + .pp-val{ font-family:var(--f-display); font-weight:700; font-size:1.25rem; margin-bottom:1.2rem; }
+  .pp-row{ display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    padding:.7rem 0; border-top:1px solid rgba(245,241,236,.1); }
+  .pp-row .lbl{ font-size:.92rem; color:rgba(245,241,236,.92); }
+  .pp-row .sub{ font-size:.72rem; color:rgba(245,241,236,.5); }
+  .verified{ display:inline-flex; align-items:center; gap:.35em; font-size:.7rem; font-weight:700;
+    letter-spacing:.04em; text-transform:uppercase; color:#7ddc9b; }
+  .pp-consent{ margin-top:1.1rem; padding-top:1.1rem; border-top:1px solid rgba(245,241,236,.1);
+    display:flex; align-items:center; justify-content:space-between; }
+  .pp-consent .lbl{ font-size:.8rem; color:rgba(245,241,236,.75); }
+  .toggle{ width:46px;height:25px;border-radius:999px;background:var(--gold);position:relative; }
+  .toggle::after{ content:""; position:absolute; top:3px; right:3px; width:19px;height:19px;border-radius:50%;background:#15110f; }
+  .pp-foot{ margin-top:1.2rem; display:flex; align-items:center; justify-content:space-between; }
+  .pp-id{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.72rem; color:rgba(245,241,236,.5); letter-spacing:.04em; }
+  .pp-secure{ font-size:.68rem; color:var(--gold-2); letter-spacing:.04em; text-transform:uppercase; font-weight:600; }
+
+  /* values strip (F A M E) */
+  .values{ background:var(--cream-2); border-block:1px solid var(--line); }
+  .values .wrap{ padding-block:clamp(3rem,6vw,4.2rem); }
+  .values-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; text-align:center; }
+  .vcol{ padding:.4rem 1rem; position:relative; }
+  .vcol + .vcol::before{ content:""; position:absolute; left:0; top:14%; height:72%; width:1px; background:var(--line); }
+  .vletter{ font-family:var(--f-display); font-weight:900; font-size:clamp(2.4rem,6vw,3.6rem); color:var(--gold); line-height:1; }
+  .vname{ font-family:var(--f-display); font-weight:800; font-size:1rem; letter-spacing:.06em; text-transform:uppercase; margin-top:.5rem; }
+  .vsub{ font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--red); margin-top:.25rem; font-weight:600; }
+  .values-tag{ text-align:center; margin-top:2rem; font-family:var(--f-display); font-weight:600; letter-spacing:.04em; color:var(--muted); font-size:.92rem; }
+
+  /* traction */
+  .facts{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.1rem 2.2rem; margin-top:.5rem; }
+  .fact{ display:flex; gap:.9rem; align-items:flex-start; padding:1.1rem 0; border-top:1px solid var(--line); }
+  .fact .k{ flex:0 0 auto; width:30px;height:30px;border-radius:8px;background:var(--red); color:#fff;
+    display:flex;align-items:center;justify-content:center; }
+  .fact .k svg{ width:16px;height:16px; }
+  .fact p{ margin:0; font-size:.97rem; color:var(--ink-2); }
+  .fact p b{ color:var(--ink); font-weight:700; }
+
+  .audience{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-top:3rem; }
+  .aud{ border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.4rem; background:var(--cream); }
+  .aud h4{ font-family:var(--f-display); font-weight:700; font-size:1.02rem; margin:0 0 .3rem; }
+  .aud p{ margin:0; font-size:.9rem; color:var(--muted); }
+
+  /* demo band */
+  .demo{
+    position:relative; overflow:hidden; color:var(--cream);
+    background:linear-gradient(135deg,#7a0e18 0%, #9E1420 42%, #6E0F18 100%);
+  }
+  .demo::before{
+    content:""; position:absolute; inset:0;
+    background:url("./assets/fame_eagle.png") right -30px center / 340px no-repeat;
+    opacity:.13; pointer-events:none;
+  }
+  .demo .ribbon{
+    position:absolute; left:-10%; bottom:-40%; width:120%; height:120%;
+    background:linear-gradient(90deg, transparent 60%, rgba(190,155,78,.18) 60.4%, rgba(190,155,78,.18) 61%, transparent 61.4%);
+    transform:rotate(-8deg); pointer-events:none;
+  }
+  .demo .wrap{ position:relative; padding-block:clamp(4rem,8vw,6rem); text-align:center; }
+  .demo .eyebrow{ color:var(--gold-2); justify-content:center; }
+  .demo .eyebrow::before{ background:var(--gold-2); }
+  .demo h2{ color:#fff; font-size:clamp(2rem,5vw,3.3rem); max-width:18ch; margin-inline:auto; }
+  .demo p{ color:rgba(245,241,236,.85); max-width:54ch; margin:1.2rem auto 0; font-size:1.08rem; }
+  .demo .hero-cta{ margin-top:2.2rem; }
+
+  /* footer */
+  footer.ft{ background:var(--ink); color:rgba(245,241,236,.7); padding:clamp(3.5rem,7vw,5rem) 0 2.5rem; }
+  .ft-top{ display:flex; justify-content:space-between; gap:2rem; flex-wrap:wrap; align-items:flex-start; }
+  .ft-brand img{ height:46px; margin-bottom:.9rem; }
+  .ft-brand .wm{ font-family:var(--f-display); font-weight:900; font-size:1.5rem; color:#fff; letter-spacing:.02em; }
+  .ft-brand .wm .a{ color:var(--red); }
+  .ft-brand p{ margin:.5rem 0 0; max-width:34ch; font-size:.92rem; }
+  .ft-cols{ display:flex; gap:3.4rem; flex-wrap:wrap; }
+  .ft-col h5{ font-family:var(--f-display); font-weight:700; font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-2); margin:0 0 .9rem; }
+  .ft-col a, .ft-col span{ display:block; font-size:.92rem; color:rgba(245,241,236,.7); margin-bottom:.5rem; transition:color .2s ease; }
+  .ft-col a:hover{ color:#fff; }
+  .ft-bottom{ margin-top:3rem; padding-top:1.6rem; border-top:1px solid rgba(245,241,236,.12);
+    display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; font-size:.8rem; color:rgba(245,241,236,.5); }
+  .ft-bottom .tagline{ font-family:var(--f-display); font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-2); }
+
+  /* reveal */
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px){
+    .grid3{ grid-template-columns:1fr; }
+    .split{ grid-template-columns:1fr; }
+    .ppcard{ max-width:440px; }
+    .audience{ grid-template-columns:1fr; }
+    .facts{ grid-template-columns:1fr; }
+    .nav-links{ display:none; }
+    .menu-btn{ display:inline-flex; }
+  }
+  @media (max-width: 560px){
+    body{ font-size:16px; }
+    .values-grid{ grid-template-columns:repeat(2,1fr); gap:1.6rem 0; }
+    .vcol:nth-child(3)::before, .vcol:nth-child(2)::before{ display:none; }
+    .hero{ padding-top:6rem; }
+    .hero-cta .btn{ width:100%; justify-content:center; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    .reveal{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="FAME home">
+      <img src="./assets/fame_eagle.png" alt="FAME eagle" />
+      <span class="wm">F<span class="a">A</span>ME</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#vision">Vision</a>
+      <a href="#platform">Platform</a>
+      <a href="#passport">Passport</a>
+      <a href="#ground">On the ground</a>
+      <!-- DEMO LINK ↓ replace ./demo/ with your live demo URL when ready -->
+      <a class="btn btn-primary" href="./demo/">Launch the demo <span class="arw">→</span></a>
+    </nav>
+    <a class="btn btn-primary menu-btn" href="./demo/">Demo <span class="arw">→</span></a>
+  </div>
+</header>
+
+<span id="top"></span>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow center reveal">Future Albanian Minds Empowered</span>
+    <div class="hero-card reveal">
+      <img src="./assets/fame_logo.jpg" alt="FAME — From Hunger to Recognition. Forcë · Ambicie · Mendje · Etikë. Built in Kosovo. Open to the world." />
+    </div>
+    <p class="lead reveal">An adaptive learning, wellbeing, and data-sovereignty platform built for
+      Albanian-speaking children — in Kosovo, Albania, and the diaspora.</p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-primary" href="./demo/">Launch the demo <span class="arw">→</span></a>
+      <a class="btn btn-ghost" href="#platform">See how it works</a>
+    </div>
+    <div class="hero-meta reveal">
+      <span>Pilot live at <b>Shkolla e Brezovës</b>, Dragash</span>
+      <span class="dot"></span>
+      <span>Child Success Passport — <b>patent-pending</b></span>
+      <span class="dot"></span>
+      <span><b>fame-kosovo.org</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISION / MANIFESTO ============ -->
+<section class="band cream2 rule-top" id="vision">
+  <div class="wrap manifesto reveal">
+    <span class="eyebrow">The founding moment</span>
+    <p>It began at a school in Brezovë, in the mountains of Dragash, where a bulletin board was
+      split in two — one half for academic announcements, the other a tribute to the UÇK.
+      Co-founders Joseph Ford and Behar Shala saw in that wall exactly what was at stake.</p>
+    <blockquote class="pullquote">Kosovo's next generation must be as free in mind and
+      capability as their parents were in <span class="accent">territory.</span></blockquote>
+    <p class="byline">The conviction behind <b>FAME</b> — from hunger to recognition.</p>
+  </div>
+</section>
+
+<!-- ============ PLATFORM ============ -->
+<section class="band" id="platform">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">One platform, three promises</span>
+      <h2 class="head">Built around the child —<br>not the institution.</h2>
+    </div>
+    <div class="grid3">
+      <article class="card reveal">
+        <div class="num">01</div>
+        <h3>Learn</h3>
+        <p>Adaptive academic learning in Albanian and English, aligned to Kosovo's National
+          Curriculum Framework for grades 3–8. Lessons meet every student exactly where they are.</p>
+        <div class="tag">Mëso · Learn</div>
+      </article>
+      <article class="card reveal">
+        <div class="num">02</div>
+        <h3>Flourish</h3>
+        <p>Holistic wellbeing support with validated screening and clear pathways to care —
+          so a child is met as a whole person, never reduced to a test score.</p>
+        <div class="tag">Lulëzo · Flourish</div>
+      </article>
+      <article class="card reveal">
+        <div class="num">03</div>
+        <h3>Own</h3>
+        <p>Every milestone is written to a record the family controls. The child's data belongs
+          to the child and the family — not to any platform, institution, or state.</p>
+        <div class="tag">Zotëro · Own</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHILD SUCCESS PASSPORT ============ -->
+<section class="band cream2 rule-top" id="passport">
+  <div class="wrap split">
+    <div class="passport-copy reveal">
+      <span class="eyebrow">The Child Success Passport · Patent-pending</span>
+      <h2 class="head">A record that belongs to the child — and travels with them for life.</h2>
+      <p class="lead">The Passport is a family-controlled, consent-governed record of each child's
+        academic, health, and developmental milestones. Achievements become portable, verifiable
+        credentials a family grants — and can revoke — at will.</p>
+      <ul class="checks">
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#CE1126"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><b>Family-held &amp; consent-governed</b> — you decide who sees what, and you can take it back.</span>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#CE1126"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><b>Verifiable credentials</b> any school, employer, or border can trust — no phone call required.</span>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#CE1126"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><b>Population insight without exposure</b> — aggregate research from anonymized data, never an individual child's record.</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- passport visual -->
+    <div class="reveal">
+      <div class="ppcard" role="img" aria-label="Illustration of a Child Success Passport credential card">
+        <div class="pp-top">
+          <div class="pp-brand">
+            <img class="eg" src="./assets/fame_eagle.png" alt="" />
+            <span class="t">Child Success<br>Passport</span>
+          </div>
+          <div class="seal">XK</div>
+        </div>
+        <div class="pp-name">Fëmijë / Child</div>
+        <div class="pp-val">Arta K.</div>
+
+        <div class="pp-row">
+          <div>
+            <div class="lbl">Matematikë · Niveli 4</div>
+            <div class="sub">National Curriculum · Grade 6</div>
+          </div>
+          <span class="verified">✓ Verified</span>
+        </div>
+        <div class="pp-row">
+          <div>
+            <div class="lbl">Leximi / Reading · Niveli 3</div>
+            <div class="sub">Albanian &amp; English</div>
+          </div>
+          <span class="verified">✓ Verified</span>
+        </div>
+        <div class="pp-row">
+          <div>
+            <div class="lbl">Wellbeing check-in</div>
+            <div class="sub">On track · pathways to care available</div>
+          </div>
+          <span class="verified">✓ Current</span>
+        </div>
+
+        <div class="pp-consent">
+          <span class="lbl">Consent — family-controlled</span>
+          <span class="toggle" aria-hidden="true"></span>
+        </div>
+
+        <div class="pp-foot">
+          <span class="pp-id">CSP-XK-2026-0427</span>
+          <span class="pp-secure">Secured · Fluree ledger</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VALUES (F A M E) ============ -->
+<section class="values" aria-label="The four pillars of FAME">
+  <div class="wrap">
+    <div class="values-grid reveal">
+      <div class="vcol"><div class="vletter">F</div><div class="vname">Forcë</div><div class="vsub">Strength</div></div>
+      <div class="vcol"><div class="vletter">A</div><div class="vname">Ambicie</div><div class="vsub">Ambition</div></div>
+      <div class="vcol"><div class="vletter">M</div><div class="vname">Mendje</div><div class="vsub">Mind</div></div>
+      <div class="vcol"><div class="vletter">E</div><div class="vname">Etikë</div><div class="vsub">Character</div></div>
+    </div>
+    <p class="values-tag reveal">The four FAME is built to grow in every child.</p>
+  </div>
+</section>
+
+<!-- ============ ON THE GROUND ============ -->
+<section class="band" id="ground">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">On the ground</span>
+      <h2 class="head">Built in Kosovo. Open to the world.</h2>
+    </div>
+    <div class="facts">
+      <div class="fact reveal">
+        <span class="k"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.2-7-11a7 7 0 1114 0c0 5.8-7 11-7 11z" stroke="#fff" stroke-width="2"/><circle cx="12" cy="10" r="2.4" fill="#fff"/></svg></span>
+        <p><b>Pilot live at Shkolla e Brezovës</b> in Brezovë, Dragash municipality — a working prototype in real classrooms.</p>
+      </div>
+      <div class="fact reveal">
+        <span class="k"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <p><b>Aligned to Kosovo's National Curriculum Framework</b>, in Albanian and English, for grades 3–8.</p>
+      </div>
+      <div class="fact reveal">
+        <span class="k"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V7l7-4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <p><b>Built with ASU's Trusted Learner Network and Fluree</b> — a cryptographic consent ledger underneath every record.</p>
+      </div>
+      <div class="fact reveal">
+        <span class="k"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="2"/></svg></span>
+        <p><b>Child Success Passport — provisional patent filed 2026</b>, with the child and family holding the keys.</p>
+      </div>
+    </div>
+
+    <div class="audience">
+      <div class="aud reveal"><h4>Students &amp; families</h4><p>A learning companion that adapts, and a record that's theirs for life.</p></div>
+      <div class="aud reveal"><h4>Schools &amp; educators</h4><p>Issue trusted credentials and meet students where they are — without surrendering data.</p></div>
+      <div class="aud reveal"><h4>Ministries, universities &amp; NGOs</h4><p>Standards-based, GDPR-ready infrastructure for a national talent layer.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO CTA ============ -->
+<section class="demo">
+  <span class="ribbon" aria-hidden="true"></span>
+  <div class="wrap">
+    <span class="eyebrow center">See it for yourself</span>
+    <h2>See FAME in motion.</h2>
+    <p>Walk through an adaptive lesson and watch a verifiable credential land in a child's own
+      Success Passport — controlled by their family, from the first day.</p>
+    <div class="hero-cta">
+      <a class="btn btn-gold" href="./demo/">Launch the demo <span class="arw">→</span></a>
+      <a class="btn btn-ghost" href="mailto:jwford@knome.tech" style="color:#fff;border-color:rgba(255,255,255,.4)">Partner with us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <img src="./assets/fame_eagle.png" alt="FAME eagle" />
+        <div class="wm">F<span class="a">A</span>ME</div>
+        <p>Future Albanian Minds Empowered. A youth-development ecosystem for Albanian-speaking
+          children — built around their sovereignty, privacy, and flourishing.</p>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <h5>Explore</h5>
+          <a href="#vision">Vision</a>
+          <a href="#platform">Platform</a>
+          <a href="#passport">Child Success Passport</a>
+          <a href="#ground">On the ground</a>
+          <a href="./demo/">Launch the demo</a>
+        </div>
+        <div class="ft-col">
+          <h5>Connect</h5>
+          <a href="https://fame-kosovo.org">fame-kosovo.org</a>
+          <a href="mailto:jwford@knome.tech">jwford@knome.tech</a>
+          <span>Prishtinë · Prizren · Boston</span>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 FAME — Future Albanian Minds Empowered · A project of Rowboats LLC.</span>
+      <span class="tagline">From Hunger to Recognition</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header background on scroll
+  var nav = document.getElementById('nav');
+  var onScroll = function(){
+    if (window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  // Scroll reveal
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold:.12, rootMargin:'0px 0px -8% 0px' });
+    els.forEach(function(el, i){
+      el.style.transitionDelay = Math.min(i % 4 * 70, 210) + 'ms';
+      io.observe(el);
+    });
+    // Failsafe: never leave content hidden
+    window.addEventListener('load', function(){
+      setTimeout(function(){ els.forEach(function(el){ el.classList.add('in'); }); }, 2600);
+    });
+  }
+</script>
+</body>
+</html>
