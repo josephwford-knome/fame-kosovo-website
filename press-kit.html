@@ -1,0 +1,454 @@
+
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAME — Kit i Medias / Press Kit</title>
+  <meta name="description" content="FAME official press materials, founder bios, the Brezne pilot, brand assets.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #F5F0E8; color: #1A1A1A; line-height: 1.65;
+    }
+    html[lang="sq"] .en-only { display: none; }
+    html[lang="en"] .sq-only { display: none; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(245, 240, 232, 0.96); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(26, 26, 26, 0.08); padding: 16px 24px;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      color: #C8102E; font-weight: 900; font-size: 22px; letter-spacing: 5px;
+      text-decoration: none; display: flex; align-items: center; gap: 10px;
+    }
+    .nav-brand img { height: 32px; }
+    .nav-actions { display: flex; gap: 18px; align-items: center; }
+    .nav-back { color: #666; font-size: 14px; text-decoration: none; }
+    .nav-back:hover { color: #1A1A1A; }
+    .lang-toggle {
+      display: flex; gap: 4px; background: #fff;
+      border: 1px solid rgba(26,26,26,0.12); border-radius: 8px; padding: 4px;
+    }
+    .lang-toggle button {
+      background: transparent; border: none; padding: 6px 12px; cursor: pointer;
+      color: #666; border-radius: 5px; font-weight: 600; font-size: 12px;
+    }
+    .lang-toggle button.active { background: #1A1A1A; color: #fff; }
+
+    main { max-width: 920px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    .page-header {
+      margin-bottom: 56px; padding-bottom: 36px;
+      border-bottom: 2px solid rgba(26,26,26,0.08); text-align: center;
+    }
+    .page-header img.eagle { height: 96px; margin-bottom: 16px; }
+    .page-header .eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: #C9A84C; margin-bottom: 8px;
+    }
+    .page-header h1 { font-size: 42px; letter-spacing: -1px; margin-bottom: 16px; line-height: 1.15; }
+    .page-header .lead { font-size: 17px; color: #555; max-width: 640px; margin: 0 auto; }
+
+    section { margin-bottom: 56px; }
+    section h2 {
+      font-size: 24px; margin-bottom: 20px; padding-bottom: 10px;
+      border-bottom: 1px solid rgba(26,26,26,0.1);
+    }
+    section h3 { font-size: 18px; margin-bottom: 8px; margin-top: 24px; }
+    section p { margin-bottom: 14px; font-size: 15px; }
+
+    .card { background: #fff; padding: 28px; border-radius: 14px; margin-bottom: 16px; }
+    .card .role { font-size: 12px; color: #888; margin-bottom: 14px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+    .card.dark { background: #1A1A1A; color: #F5F0E8; }
+    .card.dark h3 { color: #C9A84C; margin-top: 0; }
+
+    .three-promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+    .promise {
+      background: #fff; padding: 24px 22px; border-radius: 14px;
+      border-top: 4px solid;
+    }
+    .promise.p1 { border-color: #C8102E; }
+    .promise.p2 { border-color: #C9A84C; }
+    .promise.p3 { border-color: #2D6A4F; }
+    .promise .num { font-size: 11px; font-weight: 700; color: #888; letter-spacing: 2px; margin-bottom: 6px; }
+    .promise h3 { font-size: 22px; margin: 0 0 8px; }
+    .promise p { font-size: 13px; color: #555; margin: 0; line-height: 1.6; }
+
+    .fame-letters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+    .fame-letter { background: #fff; padding: 20px 12px; border-radius: 12px; text-align: center; }
+    .fame-letter .l { color: #C8102E; font-size: 32px; font-weight: 900; line-height: 1; }
+    .fame-letter .sq { font-size: 13px; font-weight: 700; margin-top: 8px; }
+    .fame-letter .en { font-size: 11px; color: #888; margin-top: 2px; text-transform: uppercase; letter-spacing: 1px; }
+
+    .fact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .fact { background: #fff; padding: 18px 22px; border-radius: 10px; border-left: 3px solid #C8102E; }
+    .fact .k { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+    .fact .v { font-size: 15px; font-weight: 600; }
+
+    .contact-card {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2a2a2a 100%);
+      color: #fff; padding: 36px 32px; border-radius: 16px; text-align: center;
+    }
+    .contact-card h3 { color: #C9A84C; margin-top: 0; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+    .contact-card .email {
+      font-size: 24px; font-weight: 700; margin-top: 12px;
+      color: #fff; text-decoration: none; display: inline-block;
+    }
+    .contact-card .email:hover { color: #C9A84C; }
+
+    footer {
+      background: #1A1A1A; color: rgba(245,240,232,0.7);
+      padding: 32px 24px; text-align: center;
+    }
+    footer a { color: #C9A84C; text-decoration: none; }
+
+    .palette { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+    .swatch { text-align: center; }
+    .swatch .chip { width: 76px; height: 76px; border-radius: 12px; margin-bottom: 6px; }
+    .swatch .hex { font-size: 11px; font-weight: 700; }
+    .swatch .name { font-size: 10px; color: #666; }
+
+    .logo-canvas {
+      background: linear-gradient(180deg, #F5F0E8 0%, #EFE8DB 100%);
+      padding: 56px 24px; border-radius: 12px; text-align: center; margin-top: 14px;
+    }
+    .logo-canvas img { height: 110px; margin-bottom: 12px; }
+    .logo-canvas .wm { color: #C8102E; font-weight: 900; font-size: 36px; letter-spacing: 10px; }
+    .logo-canvas .tag { color: #888; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-top: 6px; }
+
+    @media (max-width: 760px) {
+      main { padding: 40px 20px; }
+      .page-header h1 { font-size: 30px; }
+      .fact-grid, .three-promises { grid-template-columns: 1fr; }
+      .fame-letters { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="/fame_eagle.png" alt="FAME">
+        <span>FAME</span>
+      </a>
+      <div class="nav-actions">
+        <a href="/" class="nav-back">
+          <span class="sq-only">← Faqja kryesore</span>
+          <span class="en-only">← Home</span>
+        </a>
+        <div class="lang-toggle">
+          <button onclick="setLang('sq')" id="lang-sq-btn" class="active">SQ</button>
+          <button onclick="setLang('en')" id="lang-en-btn">EN</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <div class="page-header">
+      <img src="/fame_eagle.png" alt="FAME — Phoenix Eagle" class="eagle">
+      <div class="eyebrow">
+        <span class="sq-only">Kit i Medias</span>
+        <span class="en-only">Press Kit</span>
+      </div>
+      <h1>
+        <span class="sq-only">Burimet zyrtare të FAME për medie</span>
+        <span class="en-only">FAME — Official Press Resources</span>
+      </h1>
+      <p class="lead">
+        <span class="sq-only">Logoja, biografitë e themeluesve, faktet për pilotimin, dhe deklaratat zyrtare. Të lirshme për përdorim editorial me atribuim.</span>
+        <span class="en-only">Logo assets, founder bios, pilot facts, and official statements. Free for editorial use with attribution.</span>
+      </p>
+    </div>
+
+    <!-- ABOUT -->
+    <section>
+      <h2>
+        <span class="sq-only">Çfarë është FAME</span>
+        <span class="en-only">About FAME</span>
+      </h2>
+      <p>
+        <span class="sq-only"><strong>FAME — Future Albanian Minds Empowered</strong> — është një ekosistem zhvillimi i të rinjve për fëmijët shqipfolës në Kosovë, Shqipëri dhe diasporë. Platforma ofron mësim adaptiv akademik, mbështetje për mirëqenien, dhe një record të zotëruar nga familja për çdo arritje të fëmijës.</span>
+        <span class="en-only"><strong>FAME — Future Albanian Minds Empowered</strong> — is a youth-development ecosystem for Albanian-speaking children in Kosovo, Albania, and the diaspora. The platform delivers adaptive academic learning, holistic wellbeing support, and a family-owned record of every milestone a child achieves.</span>
+      </p>
+      <p>
+        <span class="sq-only">Pilotimi i parë po zhvillohet në <strong>Shkollën e Breznës</strong> në fshatin Breznë, komuna e Dragashit — i udhëhequr nga bashkëthemeluesi Behar Shala. Përmbajtja është e gjuhës shqipe, e përshtatur me Kornizën Kombëtare të Kurrikulës së Kosovës.</span>
+        <span class="en-only">The first pilot is underway at <strong>Shkolla e Breznës</strong> in the village of Breznë, Dragash municipality — led by co-founder Behar Shala. Content is in Albanian, aligned to Kosovo's National Curriculum Framework.</span>
+      </p>
+    </section>
+
+    <!-- THREE PROMISES -->
+    <section>
+      <h2>
+        <span class="sq-only">Tri premtime, një platformë</span>
+        <span class="en-only">Three Promises, One Platform</span>
+      </h2>
+      <p>
+        <span class="sq-only">FAME ndërtohet rreth fëmijës, jo institucionit.</span>
+        <span class="en-only">FAME is built around the child, not the institution.</span>
+      </p>
+      <div class="three-promises">
+        <div class="promise p1">
+          <div class="num">01</div>
+          <h3><span class="sq-only">Mëso</span><span class="en-only">Learn</span></h3>
+          <p>
+            <span class="sq-only">Mësim adaptiv akademik në shqipe dhe anglisht, i përshtatur me KKK të Kosovës. Mësimet e takojnë çdo nxënës saktësisht aty ku është.</span>
+            <span class="en-only">Adaptive academic learning in Albanian and English, aligned to Kosovo's NCF. Lessons meet every student exactly where they are.</span>
+          </p>
+        </div>
+        <div class="promise p2">
+          <div class="num">02</div>
+          <h3><span class="sq-only">Lulëzo</span><span class="en-only">Flourish</span></h3>
+          <p>
+            <span class="sq-only">Mbështetje për mirëqenien me skrining të validuar dhe rrugë të qarta drejt kujdesit — që fëmija të takohet si njeri i plotë.</span>
+            <span class="en-only">Holistic wellbeing support with validated screening and clear pathways to care — so a child is met as a whole person.</span>
+          </p>
+        </div>
+        <div class="promise p3">
+          <div class="num">03</div>
+          <h3><span class="sq-only">Zotëro</span><span class="en-only">Own</span></h3>
+          <p>
+            <span class="sq-only">Çdo arritje shkruhet në një record të kontrolluar nga familja. Të dhënat e fëmijës i përkasin fëmijës dhe familjes — kurrë platformës.</span>
+            <span class="en-only">Every milestone is written to a record the family controls. The child's data belongs to the child and the family — never to any platform.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- F.A.M.E FRAMEWORK -->
+    <section>
+      <h2>
+        <span class="sq-only">F.A.M.E — Katër shtylla</span>
+        <span class="en-only">F.A.M.E — Four Pillars</span>
+      </h2>
+      <p>
+        <span class="sq-only">Emri FAME nuk është rastësi. Është një kornizë vlerash që platforma synon të kultivojë te çdo fëmijë.</span>
+        <span class="en-only">The name FAME is no accident. It is a framework of values the platform aims to cultivate in every child.</span>
+      </p>
+      <div class="fame-letters">
+        <div class="fame-letter"><div class="l">F</div><div class="sq">FORCË</div><div class="en">Strength</div></div>
+        <div class="fame-letter"><div class="l">A</div><div class="sq">AMBICIE</div><div class="en">Ambition</div></div>
+        <div class="fame-letter"><div class="l">M</div><div class="sq">MENDJE</div><div class="en">Mind</div></div>
+        <div class="fame-letter"><div class="l">E</div><div class="sq">ETIKË</div><div class="en">Character</div></div>
+      </div>
+    </section>
+
+    <!-- KEY FACTS -->
+    <section>
+      <h2>
+        <span class="sq-only">Faktet kryesore</span>
+        <span class="en-only">Key Facts</span>
+      </h2>
+      <div class="fact-grid">
+        <div class="fact">
+          <div class="k"><span class="sq-only">Pilotimi</span><span class="en-only">Pilot Site</span></div>
+          <div class="v">Shkolla e Breznës, Dragash</div>
+        </div>
+        <div class="fact">
+          <div class="k"><span class="sq-only">Gjuhët</span><span class="en-only">Languages</span></div>
+          <div class="v"><span class="sq-only">Shqip & Anglisht</span><span class="en-only">Albanian & English</span></div>
+        </div>
+        <div class="fact">
+          <div class="k"><span class="sq-only">Kurrikula</span><span class="en-only">Curriculum</span></div>
+          <div class="v"><span class="sq-only">KKK Kosovë · Klasa 3-12</span><span class="en-only">Kosovo NCF · Grades 3-12</span></div>
+        </div>
+        <div class="fact">
+          <div class="k"><span class="sq-only">Passport</span><span class="en-only">Passport</span></div>
+          <div class="v"><span class="sq-only">Patent i parashtruar (2026)</span><span class="en-only">Patent-pending (2026)</span></div>
+        </div>
+        <div class="fact">
+          <div class="k"><span class="sq-only">Infrastruktura</span><span class="en-only">Infrastructure</span></div>
+          <div class="v">SOLID Pods · Fluree · HL7 FHIR</div>
+        </div>
+        <div class="fact">
+          <div class="k"><span class="sq-only">Lokacionet</span><span class="en-only">Locations</span></div>
+          <div class="v">Prishtinë · Prizren · Boston</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDERS -->
+    <section>
+      <h2>
+        <span class="sq-only">Themeluesit</span>
+        <span class="en-only">Founders</span>
+      </h2>
+
+      <div class="card">
+        <h3 style="margin-top:0;">Joseph Ford</h3>
+        <div class="role">
+          <span class="sq-only">Bashkëthemelues · Bostonë & Prishtinë</span>
+          <span class="en-only">Co-founder · Boston & Prishtina</span>
+        </div>
+        <p style="margin-bottom:0;">
+          <span class="sq-only">Themeluesi amerikan i FAME. Bashkëpunon me Beharin nga Bostoni dhe Prishtina. Themelues i Rowboats LLC, mbajtës i pronës intelektuale dhe arkitekt i platformës. Vizioni i tij për sovranitet të të dhënave të fëmijëve — të dhënat tek familja, kurrë te platforma — përbën themelin teknik dhe etik të FAME.</span>
+          <span class="en-only">The American founder of FAME. Works with Behar from Boston and Prishtina. Founder of Rowboats LLC, the IP holder, and architect of the platform. His vision for child data sovereignty — data with the family, never on the platform — forms FAME's technical and ethical foundation.</span>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0;">Behar Shala</h3>
+        <div class="role">
+          <span class="sq-only">Bashkëthemelues · Drejtor Shkolle, Dragash</span>
+          <span class="en-only">Co-founder · School Director, Dragash</span>
+        </div>
+        <p style="margin-bottom:0;">
+          <span class="sq-only">Mësues dhe drejtor shkolle në Dragash, Kosovë. Udhëheq pilotimin e FAME në Shkollën e Breznës. Shkolla e tij — ku bordi i lajmërimeve ndahet midis akademisë dhe Ushtrisë Çlirimtare të Kosovës — formësoi vizionin themelor të FAME: njohja akademike është vazhdim i lirisë me mjete të tjera.</span>
+          <span class="en-only">Teacher and school director in Dragash, Kosovo. Leads FAME's pilot at Shkolla e Breznës. His school — where the bulletin board is split between academics and the Kosovo Liberation Army — shaped FAME's foundational vision: academic knowledge is the continuation of liberation by other means.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- BRAND ASSETS -->
+    <section>
+      <h2>
+        <span class="sq-only">Materialet vizuale</span>
+        <span class="en-only">Brand Assets</span>
+      </h2>
+
+      <div class="card">
+        <h3 style="margin-top:0;">
+          <span class="sq-only">Logoja zyrtare</span>
+          <span class="en-only">Official Logo</span>
+        </h3>
+        <div class="logo-canvas">
+          <img src="/fame_eagle.png" alt="FAME eagle">
+          <div class="wm">FAME</div>
+          <div class="tag">From hunger to recognition</div>
+        </div>
+        <p style="font-size:13px; color:#666; margin-top:14px; margin-bottom:0;">
+          <span class="sq-only">Versionet vektoriale (SVG/EPS) dhe formate alternative me kërkesë.</span>
+          <span class="en-only">Vector versions (SVG/EPS) and alternate formats available on request.</span>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0;">
+          <span class="sq-only">Paleta e ngjyrave</span>
+          <span class="en-only">Color Palette</span>
+        </h3>
+        <div class="palette">
+          <div class="swatch"><div class="chip" style="background:#C8102E;"></div><div class="hex">#C8102E</div><div class="name">FAME Red</div></div>
+          <div class="swatch"><div class="chip" style="background:#1A1A1A;"></div><div class="hex">#1A1A1A</div><div class="name">Black</div></div>
+          <div class="swatch"><div class="chip" style="background:#F5F0E8; border:1px solid #ddd;"></div><div class="hex">#F5F0E8</div><div class="name">Cream</div></div>
+          <div class="swatch"><div class="chip" style="background:#C9A84C;"></div><div class="hex">#C9A84C</div><div class="name">Gold</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFICIAL STATEMENTS -->
+    <section>
+      <h2>
+        <span class="sq-only">Deklarata zyrtare</span>
+        <span class="en-only">Official Statements</span>
+      </h2>
+
+      <div class="card dark">
+        <h3>
+          <span class="sq-only">Mbi sovranitetin e të dhënave</span>
+          <span class="en-only">On Data Sovereignty</span>
+        </h3>
+        <p style="margin-bottom:0;">
+          <span class="sq-only">"FAME nuk mban të dhënat e fëmijës. Arkitektura e platformës — SOLID Pods (Inrupt) dhe Fluree — e bën skenarin 23andMe/BetterHelp të shitjes së të dhënave të fëmijëve arkitektonikisht të pamundur. Të dhënat tek familja, kurrë te platforma. Kjo është një garanci strukturale, jo një premtim."</span>
+          <span class="en-only">"FAME does not hold the child's data. The platform's architecture — SOLID Pods (Inrupt) and Fluree — makes the 23andMe/BetterHelp data-sale scenario for children's data architecturally impossible. Data with the family, never on the platform. This is a structural guarantee, not a promise."</span>
+        </p>
+      </div>
+
+      <div class="card dark">
+        <h3>
+          <span class="sq-only">Mbi pilotimin në Breznë</span>
+          <span class="en-only">On the Brezne Pilot</span>
+        </h3>
+        <p style="margin-bottom:0;">
+          <span class="sq-only">"Vendi i parë i pilotimit nuk ishte rastësi. Në shkollën e Beharit në Breznë, bordi i lajmërimeve ndahej midis akademisë dhe UÇK-së. Aty pamë saktësisht se çfarë ishte në lojë: brezi i ardhshëm i Kosovës duhet të jetë po aq i lirë në mendje dhe kapacitet sa prindërit e tyre ishin në territor."</span>
+          <span class="en-only">"The first pilot site was no accident. At Behar's school in Brezne, the bulletin board was split between academics and the KLA. We saw on that wall exactly what was at stake: Kosovo's next generation must be as free in mind and capability as their parents were in territory."</span>
+        </p>
+      </div>
+
+      <div class="card dark">
+        <h3>
+          <span class="sq-only">Mbi Child Success Passport</span>
+          <span class="en-only">On the Child Success Passport</span>
+        </h3>
+        <p style="margin-bottom:0;">
+          <span class="sq-only">"Passport-i është një record i kontrolluar nga familja për çdo arritje akademike, shëndetësore dhe zhvillimore të fëmijës. Arritjet bëhen kredenciale të verifikueshme dhe të transportueshme që familja jep — dhe mund t'i tërheqë — sipas dëshirës. Patenti i parashtruar 2026."</span>
+          <span class="en-only">"The Passport is a family-controlled record of each child's academic, health, and developmental milestones. Achievements become portable, verifiable credentials that the family grants — and can revoke — at will. Patent filed 2026."</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- USAGE GUIDELINES -->
+    <section>
+      <h2>
+        <span class="sq-only">Udhëzimet e përdorimit</span>
+        <span class="en-only">Usage Guidelines</span>
+      </h2>
+      <ul style="margin-left:20px;">
+        <li style="margin-bottom:10px; font-size:15px;">
+          <span class="sq-only">Logoja FAME duhet të paraqitet në ngjyrën e plotë, kurrë e shtrembëruar ose me kombinime ngjyrash të personalizuara.</span>
+          <span class="en-only">The FAME logo should be displayed in full color, never distorted or with custom color combinations.</span>
+        </li>
+        <li style="margin-bottom:10px; font-size:15px;">
+          <span class="sq-only">Përdorimi editorial dhe gazetaresk është falas me atribuim. Përmendni si: "FAME — Future Albanian Minds Empowered" ose thjesht "FAME".</span>
+          <span class="en-only">Editorial and journalistic use is free with attribution. Credit as: "FAME — Future Albanian Minds Empowered" or simply "FAME".</span>
+        </li>
+        <li style="margin-bottom:10px; font-size:15px;">
+          <span class="sq-only">Mos përdorni emrin FAME ose logot për të nënkuptuar partneritet ose mbështetje pa marrëveshje paraprake me shkrim.</span>
+          <span class="en-only">Do not use the FAME name or logos to imply partnership or endorsement without prior written agreement.</span>
+        </li>
+        <li style="margin-bottom:10px; font-size:15px;">
+          <span class="sq-only">Citatet e bashkëthemeluesve duhet të verifikohen direkt me jwford@knome.tech para publikimit.</span>
+          <span class="en-only">Co-founder quotes should be verified directly with jwford@knome.tech before publication.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <div class="contact-card">
+      <h3>
+        <span class="sq-only">Kontakti për Media</span>
+        <span class="en-only">Press Contact</span>
+      </h3>
+      <a href="mailto:jwford@knome.tech" class="email">jwford@knome.tech</a>
+      <p style="margin-top: 16px; font-size: 13px; opacity: 0.85;">
+        <span class="sq-only">Joseph Ford · Bashkëthemelues</span>
+        <span class="en-only">Joseph Ford · Co-founder</span>
+      </p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      <a href="/">fame-kosovo.org</a>
+      · <a href="/demo">Demo</a>
+      · <a href="mailto:jwford@knome.tech">jwford@knome.tech</a>
+    </p>
+    <p style="margin-top:14px; font-size:11px; opacity:0.6;">
+      © 2026 FAME — Future Albanian Minds Empowered · A project of Rowboats LLC
+    </p>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById('lang-sq-btn').classList.toggle('active', lang === 'sq');
+      document.getElementById('lang-en-btn').classList.toggle('active', lang === 'en');
+      try { localStorage.setItem('fame-lang', lang); } catch (e) {}
+    }
+    try {
+      const saved = localStorage.getItem('fame-lang');
+      if (saved === 'en') setLang('en');
+    } catch (e) {}
+  </script>
+</body>
+</html>
