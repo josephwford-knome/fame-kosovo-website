@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join FAME — Apply &amp; Nominate | FAME Kosovo</title>
+<meta name="description" content="Apply or nominate someone for the FAME Youth Committee, Regional Senior Advisor, or Junior Advisor roles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#C8102E;
+    --black:#1A1A1A;
+    --cream:#F9F6F0;
+    --gold:#D4AF37;
+    --grey:#6B6560;
+    --line:#E4DFD6;
+    --white:#FFFFFF;
+    --red-dark:#9C0C24;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--black);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+    color:var(--black);
+    margin:0;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  /* Skip link / focus */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, label:focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:2px;
+  }
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--black);
+    border-bottom:3px solid var(--red);
+  }
+  .header-inner{
+    max-width:1100px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand img{ height:34px; width:auto; }
+  .brand-text{ font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:22px; color:var(--white); letter-spacing:0.04em; }
+  .brand-text span{ color:var(--red); }
+  .lang-toggle{
+    display:flex; border:1px solid rgba(255,255,255,0.25); border-radius:100px; overflow:hidden;
+  }
+  .lang-toggle button{
+    background:transparent; border:none; color:var(--white); font-family:'Inter',sans-serif;
+    font-size:13px; font-weight:600; padding:7px 14px; cursor:pointer; letter-spacing:0.04em;
+  }
+  .lang-toggle button.active{ background:var(--red); }
+
+  /* Hero */
+  .hero{
+    background:
+      radial-gradient(1200px 500px at 85% -10%, rgba(200,16,46,0.10), transparent 60%),
+      var(--cream);
+    border-bottom:1px solid var(--line);
+    padding:64px 24px 48px;
+  }
+  .hero-inner{ max-width:900px; margin:0 auto; text-align:left; }
+  .eyebrow{
+    display:inline-block; font-family:'Inter',sans-serif; font-weight:700; font-size:12px;
+    letter-spacing:0.12em; text-transform:uppercase; color:var(--red);
+    border:1px solid var(--red); padding:5px 12px; border-radius:100px; margin-bottom:18px;
+  }
+  .hero h1{ font-size:56px; line-height:0.98; }
+  .hero h1 .thin{ display:block; font-weight:600; text-transform:none; font-size:22px; font-family:'Inter',sans-serif; color:var(--grey); letter-spacing:0; margin-top:14px; }
+  .hero p.lead{ font-size:18px; color:#3a3630; max-width:640px; margin-top:22px; }
+  @media (max-width:640px){ .hero h1{ font-size:38px; } }
+
+  /* Sections */
+  section{ padding:56px 24px; }
+  .wrap{ max-width:900px; margin:0 auto; }
+  .section-title{ font-size:34px; margin-bottom:8px; }
+  .section-sub{ color:var(--grey); font-size:16px; margin-bottom:32px; max-width:640px; }
+  .divider{ height:1px; background:var(--line); max-width:900px; margin:0 auto; }
+
+  /* Role cards */
+  .roles{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:800px){ .roles{ grid-template-columns:1fr; } }
+  .role-card{
+    background:var(--white); border:1px solid var(--line); border-radius:4px;
+    padding:22px 20px 20px; cursor:pointer; position:relative; transition:border-color .15s, box-shadow .15s, transform .15s;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .role-card:hover{ border-color:var(--red); box-shadow:0 6px 18px rgba(26,26,26,0.06); transform:translateY(-2px); }
+  .role-card.selected{ border-color:var(--red); box-shadow:0 0 0 2px var(--red) inset; }
+  .role-card .num{ font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:13px; color:var(--gold); letter-spacing:0.1em; }
+  .role-card h3{ font-size:24px; }
+  .role-card .al{ font-style:italic; color:var(--grey); font-size:14px; margin-top:-6px; }
+  .role-card p{ font-size:14.5px; color:#4a453f; margin:0; }
+  .role-card .meta{ font-size:12.5px; color:var(--grey); border-top:1px dashed var(--line); padding-top:10px; margin-top:auto; }
+  .role-card .pick{
+    font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--red);
+  }
+
+  /* Form */
+  .form-card{
+    background:var(--white); border:1px solid var(--line); border-radius:4px; padding:32px;
+  }
+  .type-toggle{ display:flex; gap:10px; margin-bottom:28px; flex-wrap:wrap; }
+  .type-toggle label{
+    flex:1; min-width:200px; border:1px solid var(--line); border-radius:4px; padding:14px 16px; cursor:pointer;
+    display:flex; flex-direction:column; gap:2px; transition:border-color .15s, background .15s;
+  }
+  .type-toggle input{ position:absolute; opacity:0; width:0; height:0; }
+  .type-toggle label span.t{ font-weight:700; font-size:15px; }
+  .type-toggle label span.s{ font-size:13px; color:var(--grey); }
+  .type-toggle input:checked + label,
+  .type-toggle label:has(input:checked){ border-color:var(--red); background:rgba(200,16,46,0.04); }
+
+  fieldset{ border:none; padding:0; margin:0 0 26px; }
+  legend{ font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:19px; text-transform:uppercase; letter-spacing:0.02em; margin-bottom:14px; padding-bottom:8px; border-bottom:2px solid var(--black); width:100%; }
+  legend .al{ display:block; font-family:'Inter',sans-serif; font-style:italic; font-weight:500; text-transform:none; letter-spacing:0; font-size:13.5px; color:var(--grey); margin-top:2px; }
+
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:640px){ .grid2{ grid-template-columns:1fr; } }
+
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:13.5px; font-weight:600; margin-bottom:6px; }
+  .field label .al{ display:block; font-weight:400; font-style:italic; color:var(--grey); font-size:12.5px; }
+  .field label .req{ color:var(--red); }
+  .field input[type=text], .field input[type=email], .field input[type=tel], .field input[type=date], .field select, .field textarea{
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:3px; font-family:'Inter',sans-serif; font-size:14.5px; background:var(--white); color:var(--black);
+  }
+  .field textarea{ resize:vertical; min-height:90px; }
+  .field small.hint{ display:block; margin-top:5px; color:var(--grey); font-size:12px; }
+
+  .guardian-block{
+    border:1.5px solid var(--red); border-radius:4px; padding:22px; background:#FBF1F0; margin-bottom:26px; display:none;
+  }
+  .guardian-block.show{ display:block; }
+  .guardian-block .flag{ display:flex; gap:10px; align-items:flex-start; margin-bottom:16px; }
+  .guardian-block .flag .dot{ width:8px; height:8px; border-radius:50%; background:var(--red); margin-top:7px; flex:none; }
+  .guardian-block .flag p{ margin:0; font-size:14px; }
+  .guardian-block .flag p.al{ font-style:italic; color:var(--grey); font-size:13px; margin-top:4px; }
+
+  .check{ display:flex; gap:10px; align-items:flex-start; margin-bottom:14px; }
+  .check input{ margin-top:4px; flex:none; }
+  .check label{ font-size:13.5px; }
+  .check label .al{ display:block; font-style:italic; color:var(--grey); font-size:12.5px; margin-top:2px; }
+
+  .submit-row{ display:flex; align-items:center; gap:16px; margin-top:8px; flex-wrap:wrap; }
+  button.submit{
+    background:var(--red); color:var(--white); border:none; padding:14px 30px; font-family:'Barlow Condensed',sans-serif;
+    font-weight:800; font-size:17px; letter-spacing:0.04em; text-transform:uppercase; border-radius:3px; cursor:pointer;
+    transition:background .15s;
+  }
+  button.submit:hover{ background:var(--red-dark); }
+  .submit-note{ font-size:12.5px; color:var(--grey); }
+
+  .status{ margin-top:20px; padding:14px 16px; border-radius:4px; font-size:14px; display:none; }
+  .status.show{ display:block; }
+  .status.ok{ background:#EAF6EC; border:1px solid #B7DFC0; color:#215B2E; }
+  .status.err{ background:#FBEAEA; border:1px solid #E7B4B4; color:#7A1F1F; }
+
+  footer{ padding:36px 24px; text-align:center; color:var(--grey); font-size:12.5px; border-top:1px solid var(--line); }
+
+  [data-sq]{ display:none; }
+  html.sq [data-en]{ display:none; }
+  html.sq [data-sq]{ display:block; }
+  html.sq span[data-sq]{ display:inline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href="/">
+      <img src="fame_eagle.png" alt="FAME" onerror="this.style.display='none'">
+      <span class="brand-text">F<span>A</span>ME</span>
+    </a>
+    <div class="lang-toggle" role="group" aria-label="Language / Gjuha">
+      <button type="button" id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button type="button" id="btn-sq" onclick="setLang('sq')">SHQIP</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow" data-en>Get Involved</span>
+    <span class="eyebrow" data-sq>Bëhu Pjesë</span>
+    <h1>
+      <div data-en>Join FAME<span class="thin">Apply for a volunteer role, or nominate someone you believe in.</span></div>
+      <div data-sq>Bashkohu me FAME<span class="thin">Apliko për një rol vullnetar, ose nomino dikë tek i cili beson.</span></div>
+    </h1>
+    <p class="lead" data-en>FAME's civic and economic development pillar runs on three volunteer roles across Kosovo's 7 regions: the FAME Youth Committee, Regional Senior Advisors, and Junior Advisors. Read the role descriptions below, then apply — or nominate a candidate — using the form.</p>
+    <p class="lead" data-sq>Shtylla e zhvillimit qytetar dhe ekonomik e FAME funksionon me tre role vullnetare në 7 rajonet e Kosovës: Komiteti Rinor i FAME, Këshilltarët e Lartë Rajonalë, dhe Këshilltarët e Rinj. Lexoni përshkrimet e roleve më poshtë, pastaj aplikoni — ose nominoni një kandidat — duke përdorur formularin.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="roles">
+  <div class="wrap">
+    <h2 class="section-title" data-en>Choose a role</h2>
+    <h2 class="section-title" data-sq>Zgjidh një rol</h2>
+    <p class="section-sub" data-en>Selecting a role below will pre-fill it in the form. You can change it at any time.</p>
+    <p class="section-sub" data-sq>Zgjedhja e një roli më poshtë do ta plotësojë automatikisht në formular. Mund ta ndryshoni në çdo kohë.</p>
+
+    <div class="roles">
+      <div class="role-card" data-role="committee" onclick="selectRole('committee')">
+        <span class="num">01</span>
+        <h3 data-en>Youth Committee</h3>
+        <h3 data-sq>Komiteti Rinor</h3>
+        <p class="al" data-en>Anëtar i Komitetit Rinor</p>
+        <p data-en>University students (18+) who lead the regional SWOT process and oversee Junior Advisors.</p>
+        <p data-sq>Studentë universitarë (18+) që udhëheqin procesin rajonal SWOT dhe mbikëqyrin Këshilltarët e Rinj.</p>
+        <div class="meta" data-en>5–6 per region · unpaid · reference letter on completion</div>
+        <div class="meta" data-sq>5–6 për rajon · vullnetare · letër reference pas përfundimit</div>
+        <span class="pick" data-en>Select this role →</span>
+        <span class="pick" data-sq>Zgjidh këtë rol →</span>
+      </div>
+
+      <div class="role-card" data-role="advisor" onclick="selectRole('advisor')">
+        <span class="num">02</span>
+        <h3 data-en>Senior Advisor</h3>
+        <h3 data-sq>Këshilltar i Lartë</h3>
+        <p class="al" data-en>Këshilltar i Lartë Rajonal</p>
+        <p data-en>Professors, EU/government officials, or retired officials who mentor a regional Youth Committee.</p>
+        <p data-sq>Profesorë, zyrtarë të BE-së/qeverisë, ose ish-zyrtarë që mentorojnë një Komitet Rinor Rajonal.</p>
+        <div class="meta" data-en>1–2 per region · advisory role · public recognition</div>
+        <div class="meta" data-sq>1–2 për rajon · rol këshillimor · njohje publike</div>
+        <span class="pick" data-en>Select this role →</span>
+        <span class="pick" data-sq>Zgjidh këtë rol →</span>
+      </div>
+
+      <div class="role-card" data-role="junior" onclick="selectRole('junior')">
+        <span class="num">03</span>
+        <h3 data-en>Junior Advisor</h3>
+        <h3 data-sq>Këshilltar/e i/e Ri/Re</h3>
+        <p class="al" data-en>Këshilltar/e i/e Ri/Re</p>
+        <p data-en>Youth under 18 who share local, municipal-level perspective through a supervised Liaison.</p>
+        <p data-sq>Të rinj nën 18 vjeç që ndajnë perspektivë lokale, në nivel komune, përmes një Lidhësi të mbikëqyrur.</p>
+        <div class="meta" data-en>10–12 per region · requires parent/guardian permission</div>
+        <div class="meta" data-sq>10–12 për rajon · kërkon pëlqim prindëror/kujdestarie</div>
+        <span class="pick" data-en>Select this role →</span>
+        <span class="pick" data-sq>Zgjidh këtë rol →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="form">
+  <div class="wrap">
+    <h2 class="section-title" data-en>Apply or nominate</h2>
+    <h2 class="section-title" data-sq>Apliko ose nomino</h2>
+    <p class="section-sub" data-en>Applying for yourself and nominating someone else use the same form — just tell us which one this is.</p>
+    <p class="section-sub" data-sq>Aplikimi për veten dhe nominimi i dikujt tjetër përdorin të njëjtin formular — thjesht na tregoni cili nga këto është.</p>
+
+    <div class="form-card">
+      <!--
+        SETUP NOTE FOR JOSEPH:
+        This form posts to Formspree (https://formspree.io) — free tier is enough to start.
+        1. Create a free Formspree account and a new form.
+        2. Replace YOUR_FORM_ID below (in the form action URL) with your real Formspree form ID.
+        3. Formspree will email new submissions to the account owner by default.
+        No backend/server is required — this works as-is on GitHub Pages.
+      -->
+      <form id="fame-apply-form" action="https://formspree.io/f/" method="POST">
+        <input type="hidden" name="_subject" value="FAME Volunteer Application / Nomination">
+
+        <!-- Submission type -->
+        <fieldset>
+          <legend data-en>Submission type<span class="al" data-en>What is this?</span></legend>
+          <legend data-sq>Lloji i dorëzimit<span class="al" data-sq>Çfarë është ky dorëzim?</span></legend>
+          <div class="type-toggle">
+            <label>
+              <input type="radio" name="submission_type" value="Application" checked onchange="onTypeChange()">
+              <span class="t" data-en>I'm applying for myself</span>
+              <span class="t" data-sq>Po aplikoj për veten</span>
+              <span class="s" data-en>You are the candidate</span>
+              <span class="s" data-sq>Ju jeni kandidati/ja</span>
+            </label>
+            <label>
+              <input type="radio" name="submission_type" value="Nomination" onchange="onTypeChange()">
+              <span class="t" data-en>I'm nominating someone</span>
+              <span class="t" data-sq>Po nominoj dikë</span>
+              <span class="s" data-en>Someone else is the candidate</span>
+              <span class="s" data-sq>Dikush tjetër është kandidati/ja</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Role -->
+        <fieldset>
+          <legend data-en>Role<span class="al" data-en>Which role is this for?</span></legend>
+          <legend data-sq>Roli<span class="al" data-sq>Për cilin rol është ky aplikim?</span></legend>
+          <div class="field">
+            <label for="role" data-en>Role <span class="req">*</span></label>
+            <label for="role" data-sq>Roli <span class="req">*</span></label>
+            <select id="role" name="role" required onchange="onRoleChange()">
+              <option value="">— select / zgjidh —</option>
+              <option value="FAME Youth Committee">FAME Youth Committee / Komiteti Rinor</option>
+              <option value="Regional Senior Advisor">Regional Senior Advisor / Këshilltar i Lartë Rajonal</option>
+              <option value="Junior Advisor">Junior Advisor / Këshilltar/e i/e Ri/Re (under 18 / nën 18 vjeç)</option>
+            </select>
+          </div>
+          <div class="grid2">
+            <div class="field">
+              <label for="region" data-en>Region <span class="req">*</span></label>
+              <label for="region" data-sq>Rajoni <span class="req">*</span></label>
+              <select id="region" name="region" required>
+                <option value="">— select / zgjidh —</option>
+                <option>Prishtina</option>
+                <option>Mitrovica</option>
+                <option>Peja (Pejë)</option>
+                <option>Prizren</option>
+                <option>Ferizaj</option>
+                <option>Gjilan</option>
+                <option>Gjakova</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="municipality" data-en>Municipality <span class="req">*</span></label>
+              <label for="municipality" data-sq>Komuna <span class="req">*</span></label>
+              <input type="text" id="municipality" name="municipality" required placeholder="e.g. Dragash">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Nominator (only shown for nominations) -->
+        <fieldset id="nominator-fieldset" style="display:none;">
+          <legend data-en>Your details (nominator)<span class="al" data-en>So we can follow up with you</span></legend>
+          <legend data-sq>Të dhënat tuaja (nominuesi)<span class="al" data-sq>Që të mund t'ju kontaktojmë</span></legend>
+          <div class="grid2">
+            <div class="field">
+              <label for="nominator_name" data-en>Your full name</label>
+              <label for="nominator_name" data-sq>Emri juaj i plotë</label>
+              <input type="text" id="nominator_name" name="nominator_name">
+            </div>
+            <div class="field">
+              <label for="nominator_relationship" data-en>Your relationship to the candidate</label>
+              <label for="nominator_relationship" data-sq>Marrëdhënia juaj me kandidatin/en</label>
+              <input type="text" id="nominator_relationship" name="nominator_relationship" placeholder="e.g. teacher, family friend">
+            </div>
+            <div class="field">
+              <label for="nominator_email" data-en>Your email</label>
+              <label for="nominator_email" data-sq>Email-i juaj</label>
+              <input type="email" id="nominator_email" name="nominator_email">
+            </div>
+            <div class="field">
+              <label for="nominator_phone" data-en>Your phone</label>
+              <label for="nominator_phone" data-sq>Telefoni juaj</label>
+              <input type="tel" id="nominator_phone" name="nominator_phone">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Candidate details -->
+        <fieldset>
+          <legend id="candidate-legend-en" data-en>Candidate details<span class="al" data-en>The person applying for the role</span></legend>
+          <legend id="candidate-legend-sq" data-sq>Të dhënat e kandidatit/es<span class="al" data-sq>Personi që aplikon për rolin</span></legend>
+          <div class="grid2">
+            <div class="field">
+              <label for="candidate_name" data-en>Full name <span class="req">*</span></label>
+              <label for="candidate_name" data-sq>Emri i plotë <span class="req">*</span></label>
+              <input type="text" id="candidate_name" name="candidate_name" required>
+            </div>
+            <div class="field">
+              <label for="dob" data-en>Date of birth <span class="req">*</span></label>
+              <label for="dob" data-sq>Data e lindjes <span class="req">*</span></label>
+              <input type="date" id="dob" name="date_of_birth" required onchange="checkAge()">
+              <small class="hint" data-en>Used only to confirm role eligibility.</small>
+              <small class="hint" data-sq>Përdoret vetëm për të konfirmuar përshtatshmërinë për rolin.</small>
+            </div>
+            <div class="field">
+              <label for="candidate_email" data-en>Email</label>
+              <label for="candidate_email" data-sq>Email-i</label>
+              <input type="email" id="candidate_email" name="candidate_email">
+            </div>
+            <div class="field">
+              <label for="candidate_phone" data-en>Phone</label>
+              <label for="candidate_phone" data-sq>Telefoni</label>
+              <input type="tel" id="candidate_phone" name="candidate_phone">
+            </div>
+          </div>
+          <div class="field" id="university-field" style="display:none;">
+            <label for="university" data-en>University &amp; field of study</label>
+            <label for="university" data-sq>Universiteti dhe fusha e studimit</label>
+            <input type="text" id="university" name="university_and_field" placeholder="e.g. University of Prishtina — Economics">
+          </div>
+          <div class="field" id="background-field" style="display:none;">
+            <label for="background" data-en>Professional / academic background</label>
+            <label for="background" data-sq>Prejardhja profesionale / akademike</label>
+            <input type="text" id="background" name="professional_background" placeholder="e.g. Professor of Political Economy, University of Prishtina">
+          </div>
+          <div class="field">
+            <label for="motivation" data-en>Why are they a good fit for this role? <span class="req">*</span></label>
+            <label for="motivation" data-sq>Pse është/jeni i/e përshtatshëm/e për këtë rol? <span class="req">*</span></label>
+            <textarea id="motivation" name="motivation" required></textarea>
+          </div>
+          <div class="field">
+            <label for="experience" data-en>Relevant experience (optional)</label>
+            <label for="experience" data-sq>Përvoja relevante (opsionale)</label>
+            <textarea id="experience" name="relevant_experience"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Guardian block -->
+        <div class="guardian-block" id="guardian-block">
+          <div class="flag">
+            <span class="dot"></span>
+            <div>
+              <p data-en><strong>Parent / Guardian permission required.</strong> Junior Advisors and any candidate under 18 must have a parent or legal guardian complete this section before participation can begin.</p>
+              <p class="al" data-sq><strong>Kërkohet pëlqimi i prindit / kujdestarit.</strong> Këshilltarët e Rinj dhe çdo kandidat nën 18 vjeç duhet të kenë një prind ose kujdestar ligjor që plotëson këtë seksion para se pjesëmarrja të fillojë.</p>
+            </div>
+          </div>
+          <div class="grid2">
+            <div class="field">
+              <label for="guardian_name" data-en>Parent / guardian full name <span class="req">*</span></label>
+              <label for="guardian_name" data-sq>Emri i plotë i prindit / kujdestarit <span class="req">*</span></label>
+              <input type="text" id="guardian_name" name="guardian_name">
+            </div>
+            <div class="field">
+              <label for="guardian_relationship" data-en>Relationship to candidate <span class="req">*</span></label>
+              <label for="guardian_relationship" data-sq>Marrëdhënia me kandidatin/en <span class="req">*</span></label>
+              <input type="text" id="guardian_relationship" name="guardian_relationship">
+            </div>
+            <div class="field">
+              <label for="guardian_email" data-en>Parent / guardian email <span class="req">*</span></label>
+              <label for="guardian_email" data-sq>Email-i i prindit / kujdestarit <span class="req">*</span></label>
+              <input type="email" id="guardian_email" name="guardian_email">
+            </div>
+            <div class="field">
+              <label for="guardian_phone" data-en>Parent / guardian phone <span class="req">*</span></label>
+              <label for="guardian_phone" data-sq>Telefoni i prindit / kujdestarit <span class="req">*</span></label>
+              <input type="tel" id="guardian_phone" name="guardian_phone">
+            </div>
+          </div>
+
+          <div class="check">
+            <input type="checkbox" id="consent_participate" name="consent_participate" value="Yes">
+            <label for="consent_participate">
+              <span data-en>I give permission for the above child to participate as a FAME Junior Advisor, understanding that all contact with FAME will run through the designated Youth Committee Liaison, all contributions will be reviewed by an adult before use, and no cash payments, prizes, or performance-based incentives will be offered.</span>
+              <span class="al" data-sq>Unë jap pëlqimin që fëmija i lartpërmendur të marrë pjesë si Këshilltar/e i/e Ri/Re i FAME, duke kuptuar se çdo kontakt me FAME do të kalojë përmes Lidhësit të caktuar të Komitetit Rinor, çdo kontribut do të rishikohet nga një i rritur para përdorimit, dhe nuk do të ofrohen pagesa në para, çmime, apo stimuj bazuar në performancë.</span>
+            </label>
+          </div>
+          <div class="check">
+            <input type="checkbox" id="consent_publish" name="consent_publish_content" value="Yes">
+            <label for="consent_publish">
+              <span data-en>I understand that separate, specific permission will be requested before any content or contribution involving my child is published publicly, and that I may decline that separate request at any time.</span>
+              <span class="al" data-sq>Unë e kuptoj se do të kërkohet një pëlqim i veçantë dhe specifik para se çdo përmbajtje apo kontribut që përfshin fëmijën tim të publikohet, dhe se mund ta refuzoj atë kërkesë të veçantë në çdo kohë.</span>
+            </label>
+          </div>
+          <div class="field">
+            <label for="guardian_signature" data-en>Parent / guardian typed signature <span class="req">*</span></label>
+            <label for="guardian_signature" data-sq>Nënshkrimi i shkruar i prindit / kujdestarit <span class="req">*</span></label>
+            <input type="text" id="guardian_signature" name="guardian_signature" placeholder="Type full legal name as signature / Shkruani emrin e plotë ligjor si nënshkrim">
+          </div>
+          <div class="field" style="max-width:220px;">
+            <label for="guardian_date" data-en>Date <span class="req">*</span></label>
+            <label for="guardian_date" data-sq>Data <span class="req">*</span></label>
+            <input type="date" id="guardian_date" name="guardian_signature_date">
+          </div>
+        </div>
+
+        <!-- General consent -->
+        <fieldset>
+          <legend data-en>Consent<span class="al" data-en>Required for all submissions</span></legend>
+          <legend data-sq>Pëlqimi<span class="al" data-sq>Kërkohet për të gjitha dorëzimet</span></legend>
+          <div class="check">
+            <input type="checkbox" id="consent_data" name="consent_data_processing" required>
+            <label for="consent_data">
+              <span data-en>I consent to FAME storing and reviewing this information for the purpose of considering this application or nomination. <span class="req">*</span></span>
+              <span class="al" data-sq>Unë pajtohem që FAME të ruajë dhe rishikojë këtë informacion me qëllim shqyrtimin e këtij aplikimi ose nominimi. <span class="req">*</span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="submit-row">
+          <button type="submit" class="submit" data-en>Submit</button>
+          <button type="submit" class="submit" data-sq>Dërgo</button>
+          <span class="submit-note" data-en>FAME will follow up by email within 1–2 weeks.</span>
+          <span class="submit-note" data-sq>FAME do t'ju kontaktojë me email brenda 1–2 javëve.</span>
+        </div>
+
+        <div class="status ok" id="status-ok">
+          <span data-en>Thank you — your submission has been received.</span>
+          <span data-sq>Faleminderit — dorëzimi juaj u pranua.</span>
+        </div>
+        <div class="status err" id="status-err">
+          <span data-en>Something went wrong. Please try again, or email founders@fame-kosovo.org directly.</span>
+          <span data-sq>Diçka shkoi keq. Ju lutemi provoni përsëri, ose na shkruani direkt tek founders@fame-kosovo.org.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-en>© 2026 FAME — Future Albanian Minds Empowered · Questions? founders@fame-kosovo.org</span>
+  <span data-sq>© 2026 FAME — Future Albanian Minds Empowered · Pyetje? founders@fame-kosovo.org</span>
+</footer>
+
+<script>
+  function setLang(lang){
+    document.documentElement.classList.toggle('sq', lang === 'sq');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-sq').classList.toggle('active', lang === 'sq');
+    document.documentElement.setAttribute('lang', lang);
+    try{ localStorage.setItem('fame_lang', lang); }catch(e){}
+  }
+  (function initLang(){
+    var saved = null;
+    try{ saved = localStorage.getItem('fame_lang'); }catch(e){}
+    if(saved === 'sq') setLang('sq');
+  })();
+
+  var roleSelect = document.getElementById('role');
+  var roleMap = { committee: 'FAME Youth Committee', advisor: 'Regional Senior Advisor', junior: 'Junior Advisor' };
+
+  function selectRole(key){
+    document.querySelectorAll('.role-card').forEach(function(c){ c.classList.remove('selected'); });
+    document.querySelector('.role-card[data-role="' + key + '"]').classList.add('selected');
+    roleSelect.value = roleMap[key];
+    onRoleChange();
+    document.getElementById('form').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function onRoleChange(){
+    var val = roleSelect.value;
+    var isJunior = (val === 'Junior Advisor');
+    var isCommittee = (val === 'FAME Youth Committee');
+    var isAdvisor = (val === 'Regional Senior Advisor');
+    document.getElementById('university-field').style.display = isCommittee ? '' : 'none';
+    document.getElementById('background-field').style.display = isAdvisor ? '' : 'none';
+    updateGuardianVisibility();
+  }
+
+  function checkAge(){ updateGuardianVisibility(); }
+
+  function updateGuardianVisibility(){
+    var val = roleSelect.value;
+    var dob = document.getElementById('dob').value;
+    var isJunior = (val === 'Junior Advisor');
+    var under18 = false;
+    if(dob){
+      var birth = new Date(dob);
+      var now = new Date();
+      var age = now.getFullYear() - birth.getFullYear();
+      var m = now.getMonth() - birth.getMonth();
+      if(m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--;
+      under18 = age < 18;
+    }
+    var show = isJunior || under18;
+    var block = document.getElementById('guardian-block');
+    block.classList.toggle('show', show);
+    ['guardian_name','guardian_relationship','guardian_email','guardian_phone','guardian_signature','guardian_date'].forEach(function(id){
+      document.getElementById(id).required = show;
+    });
+    document.getElementById('consent_participate').required = show;
+  }
+
+  function onTypeChange(){
+    var type = document.querySelector('input[name="submission_type"]:checked').value;
+    var isNom = (type === 'Nomination');
+    document.getElementById('nominator-fieldset').style.display = isNom ? '' : 'none';
+    document.getElementById('nominator_name').required = isNom;
+    document.getElementById('nominator_email').required = isNom;
+  }
+
+  document.getElementById('fame-apply-form').addEventListener('submit', function(e){
+    var action = this.getAttribute('action') || '';
+    if(action.indexOf('YOUR_FORM_ID') !== -1){
+      e.preventDefault();
+      alert('Form is not yet connected. Set your Formspree form ID in apply.html before going live.\n\nFormulari nuk është ende i lidhur. Vendosni ID-në tuaj të Formspree në apply.html para se ta publikoni.');
+      return;
+    }
+    // Let Formspree handle actual submission (AJAX handling can be added later if desired)
+  });
+
+  onRoleChange();
+</script>
+
+</body>
+</html>
