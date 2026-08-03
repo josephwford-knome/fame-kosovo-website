@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Cousins Youth Survey | FAME Kosovo</title>
+<meta name="description" content="A quick, anonymous survey comparing how Kosovo youth and diaspora youth see identity, language, and the future.">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#C8102E;
+    --black:#1A1A1A;
+    --cream:#F9F6F0;
+    --gold:#D4AF37;
+    --grey:#6B6560;
+    --line:#E4DFD6;
+    --white:#FFFFFF;
+    --red-dark:#9C0C24;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--black);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+    color:var(--black);
+    margin:0;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, label:focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:2px;
+  }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--black);
+    border-bottom:3px solid var(--red);
+  }
+  .header-inner{
+    max-width:1100px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand img{ height:34px; width:auto; }
+  .brand-text{ font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:22px; color:var(--white); letter-spacing:0.04em; }
+  .brand-text span{ color:var(--red); }
+  .lang-toggle{
+    display:flex; border:1px solid rgba(255,255,255,0.25); border-radius:100px; overflow:hidden;
+  }
+  .lang-toggle button{
+    background:transparent; border:none; color:var(--white); font-family:'Inter',sans-serif;
+    font-size:13px; font-weight:600; padding:7px 14px; cursor:pointer; letter-spacing:0.04em;
+  }
+  .lang-toggle button.active{ background:var(--red); }
+
+  .hero{
+    background:
+      radial-gradient(1200px 500px at 85% -10%, rgba(200,16,46,0.10), transparent 60%),
+      var(--cream);
+    border-bottom:1px solid var(--line);
+    padding:64px 24px 48px;
+  }
+  .hero-inner{ max-width:820px; margin:0 auto; text-align:left; }
+  .eyebrow{
+    display:inline-block; font-family:'Inter',sans-serif; font-weight:700; font-size:12px;
+    letter-spacing:0.12em; text-transform:uppercase; color:var(--red);
+    border:1px solid var(--red); padding:5px 12px; border-radius:100px; margin-bottom:18px;
+  }
+  .hero h1{ font-size:52px; line-height:0.98; }
+  .hero h1 .thin{ display:block; font-weight:600; text-transform:none; font-size:20px; font-family:'Inter',sans-serif; color:var(--grey); letter-spacing:0; margin-top:14px; }
+  .hero p.lead{ font-size:17px; color:#3a3630; max-width:680px; margin-top:22px; }
+  .hero .consent-note{ margin-top:18px; padding:14px 16px; border-left:3px solid var(--gold); background:#FBF7EC; font-size:14px; color:#3a3630; max-width:680px; }
+  @media (max-width:640px){ .hero h1{ font-size:36px; } }
+
+  section{ padding:48px 24px; }
+  .wrap{ max-width:820px; margin:0 auto; }
+  .section-title{ font-size:30px; margin-bottom:8px; }
+  .section-sub{ color:var(--grey); font-size:15px; margin-bottom:28px; max-width:640px; }
+  .divider{ height:1px; background:var(--line); max-width:820px; margin:0 auto; }
+
+  /* Counter */
+  .counter-card{
+    background:var(--white); border:1px solid var(--line); border-radius:4px; padding:28px 26px;
+  }
+  .counter-total-row{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:10px; gap:10px; flex-wrap:wrap; }
+  .counter-total-row .num{ font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:38px; color:var(--black); }
+  .counter-total-row .goal{ color:var(--grey); font-size:13.5px; }
+  .bar-track{ height:12px; border-radius:100px; background:var(--line); overflow:hidden; margin-bottom:26px; }
+  .bar-fill{ height:100%; background:var(--red); border-radius:100px; transition:width .6s ease; width:0%; }
+  .split-row{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  @media (max-width:560px){ .split-row{ grid-template-columns:1fr; } }
+  .split-label{ display:flex; justify-content:space-between; font-size:13px; font-weight:700; margin-bottom:6px; }
+  .split-label .n{ color:var(--grey); font-weight:600; }
+  .split-track{ height:8px; border-radius:100px; background:var(--line); overflow:hidden; }
+  .split-fill{ height:100%; border-radius:100px; transition:width .6s ease; width:0%; }
+  .split-fill.kosovo{ background:var(--red); }
+  .split-fill.diaspora{ background:var(--gold); }
+  .trust-copy{ margin-top:22px; padding-top:18px; border-top:1px dashed var(--line); font-size:12.5px; color:var(--grey); line-height:1.7; }
+  .trust-copy strong{ color:var(--black); }
+  .trust-copy p{ margin:0 0 8px; }
+  .trust-copy p:last-child{ margin-bottom:0; }
+
+  /* Branch cards */
+  .branches{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media (max-width:640px){ .branches{ grid-template-columns:1fr; } }
+  .branch-card{
+    background:var(--white); border:1px solid var(--line); border-radius:4px;
+    padding:24px 22px; cursor:pointer; position:relative; transition:border-color .15s, box-shadow .15s, transform .15s;
+    display:flex; flex-direction:column; gap:10px; text-align:left;
+  }
+  .branch-card:hover{ border-color:var(--red); box-shadow:0 6px 18px rgba(26,26,26,0.06); transform:translateY(-2px); }
+  .branch-card h3{ font-size:24px; }
+  .branch-card p{ font-size:14.5px; color:#4a453f; margin:0; }
+  .branch-card .pick{ font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--red); margin-top:auto; }
+
+  /* Form */
+  .form-card{ background:var(--white); border:1px solid var(--line); border-radius:4px; padding:32px; display:none; }
+  .form-card.show{ display:block; }
+  .change-branch{ display:inline-block; margin-bottom:20px; font-size:13px; font-weight:600; color:var(--grey); cursor:pointer; text-decoration:underline; background:none; border:none; padding:0; }
+  .change-branch:hover{ color:var(--red); }
+
+  fieldset{ border:none; padding:0; margin:0 0 24px; }
+  legend{ font-family:'Inter',sans-serif; font-weight:600; font-size:14.5px; margin-bottom:10px; padding:0; width:100%; }
+  legend .req{ color:var(--red); }
+  legend .opt{ color:var(--grey); font-weight:400; font-style:italic; font-size:12.5px; }
+
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:560px){ .grid2{ grid-template-columns:1fr; } }
+
+  .field{ margin-bottom:20px; }
+  .field label{ display:block; font-size:13.5px; font-weight:600; margin-bottom:6px; }
+  .field label .al{ display:block; font-weight:400; font-style:italic; color:var(--grey); font-size:12.5px; margin-top:2px; }
+  .field label .req{ color:var(--red); }
+  .field label .opt{ color:var(--grey); font-weight:400; font-style:italic; font-size:12px; }
+  .field input[type=text], .field input[type=number], .field select, .field textarea{
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:3px; font-family:'Inter',sans-serif; font-size:14.5px; background:var(--white); color:var(--black);
+  }
+  .field textarea{ resize:vertical; min-height:80px; }
+
+  .scale-group{ display:flex; gap:8px; }
+  .scale-group label{ flex:1; position:relative; margin:0; }
+  .scale-group input{ position:absolute; opacity:0; width:0; height:0; }
+  .scale-group span{ display:flex; align-items:center; justify-content:center; border:1px solid var(--line); border-radius:4px; padding:10px 0; cursor:pointer; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:17px; }
+  .scale-group input:checked + span{ border-color:var(--red); background:rgba(200,16,46,.08); color:var(--red); }
+  .scale-hint{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--grey); margin-top:6px; }
+
+  .pill-group{ display:flex; gap:10px; flex-wrap:wrap; }
+  .pill-group label{ border:1px solid var(--line); border-radius:100px; padding:9px 18px; font-size:13.5px; cursor:pointer; margin:0; transition:border-color .15s, background .15s; }
+  .pill-group input{ position:absolute; opacity:0; width:0; height:0; }
+  .pill-group label:has(input:checked){ border-color:var(--red); background:rgba(200,16,46,0.06); color:var(--red); font-weight:600; }
+
+  .submit-row{ display:flex; align-items:center; gap:16px; margin-top:8px; flex-wrap:wrap; }
+  button.submit{
+    background:var(--red); color:var(--white); border:none; padding:14px 30px; font-family:'Barlow Condensed',sans-serif;
+    font-weight:800; font-size:17px; letter-spacing:0.04em; text-transform:uppercase; border-radius:3px; cursor:pointer;
+    transition:background .15s;
+  }
+  button.submit:hover{ background:var(--red-dark); }
+  button.submit:disabled{ background:var(--grey); cursor:not-allowed; }
+  .submit-note{ font-size:12.5px; color:var(--grey); }
+
+  .status{ margin-top:20px; padding:14px 16px; border-radius:4px; font-size:14px; display:none; }
+  .status.show{ display:block; }
+  .status.ok{ background:#EAF6EC; border:1px solid #B7DFC0; color:#215B2E; }
+  .status.err{ background:#FBEAEA; border:1px solid #E7B4B4; color:#7A1F1F; }
+  .status.info{ background:#FBF7EC; border:1px solid #E9D9A8; color:#6B5410; }
+
+  .result-panel{ background:var(--white); border:1px solid var(--line); border-radius:4px; padding:36px 32px; text-align:center; display:none; }
+  .result-panel.show{ display:block; }
+  .result-panel .big{ font-size:44px; margin-bottom:10px; }
+  .result-panel h3{ font-size:26px; margin-bottom:10px; }
+  .result-panel p{ color:var(--grey); font-size:14.5px; max-width:480px; margin:0 auto; }
+
+  footer{ padding:36px 24px; text-align:center; color:var(--grey); font-size:12.5px; border-top:1px solid var(--line); }
+
+  [data-sq]{ display:none; }
+  html.sq [data-en]{ display:none; }
+  html.sq [data-sq]{ display:block; }
+  html.sq span[data-sq]{ display:inline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href="/">
+      <img src="/fame_eagle.png" alt="FAME" onerror="this.style.display='none'">
+      <span class="brand-text">F<span>A</span>ME</span>
+    </a>
+    <div class="lang-toggle" role="group" aria-label="Language / Gjuha">
+      <button type="button" id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button type="button" id="btn-sq" onclick="setLang('sq')">SHQIP</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow" data-en>Youth Survey</span>
+    <span class="eyebrow" data-sq>Pyetësor Rinor</span>
+    <h1>
+      <div data-en>Two Cousins<span class="thin">Kosovo youth and diaspora youth, three minutes each, one honest picture.</span></div>
+      <div data-sq>Dy Kushërinj<span class="thin">Rinia në Kosovë dhe rinia e diasporës, tre minuta secili, një pamje e sinqertë.</span></div>
+    </h1>
+    <p class="lead" data-en>FAME is a youth project building the future of Kosovo through education and health — created with Kosovo educators, including school director Behar Shala. This quick survey (3 min) compares how Kosovo youth and diaspora youth see identity, language, and the future. Your answers are anonymous and help us build better programs for Albanian youth everywhere.</p>
+    <p class="lead" data-sq>FAME është një projekt rinor që ndërton të ardhmen e Kosovës përmes arsimit dhe shëndetit — krijuar me edukatorë kosovarë, përfshirë drejtorin e shkollës Behar Shala. Ky pyetësor i shpejtë (3 min) krahason se si rinia në Kosovë dhe rinia e diasporës e shohin identitetin, gjuhën dhe të ardhmen. Përgjigjet janë anonime dhe na ndihmojnë të ndërtojmë programe më të mira për rininë shqiptare kudo.</p>
+    <div class="consent-note">
+      <p data-en style="margin:0;">If you're under 18, please get a parent's OK before continuing.</p>
+      <p data-sq style="margin:0;">Nëse je nën 18 vjeç, kërko lejen e prindërve para se të vazhdosh.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="counter-section">
+  <div class="wrap">
+    <h2 class="section-title" data-en>How many so far</h2>
+    <h2 class="section-title" data-sq>Sa deri tani</h2>
+    <p class="section-sub" data-en>Live count of responses toward our goal.</p>
+    <p class="section-sub" data-sq>Numri i përgjigjeve deri tani, drejt qëllimit tonë.</p>
+
+    <div class="counter-card">
+      <div class="counter-total-row">
+        <span class="num" id="count-total">0</span>
+        <span class="goal"><span data-en>of a goal of</span><span data-sq>nga një qëllim prej</span> <span id="count-goal">500</span></span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" id="bar-total"></div></div>
+
+      <div class="split-row">
+        <div>
+          <div class="split-label"><span data-en>Kosovo</span><span data-sq>Kosovë</span><span class="n" id="count-kosovo">0</span></div>
+          <div class="split-track"><div class="split-fill kosovo" id="bar-kosovo"></div></div>
+        </div>
+        <div>
+          <div class="split-label"><span data-en>Diaspora</span><span data-sq>Diasporë</span><span class="n" id="count-diaspora">0</span></div>
+          <div class="split-track"><div class="split-fill diaspora" id="bar-diaspora"></div></div>
+        </div>
+      </div>
+
+      <div class="trust-copy">
+        <p data-en><strong>Anonymous by design.</strong> We don't collect names, phone numbers, or emails — just your answers and a scale/branch.</p>
+        <p data-sq><strong>Anonime nga dizajni.</strong> Nuk mbledhim emra, numra telefoni apo email — vetëm përgjigjet tuaja dhe një shkallë/degë.</p>
+        <p data-en>Each device can count once per branch (Kosovo or diaspora), enforced on our server using a one-way hash — this stops casual double-submission, not someone determined to clear their browser and resubmit. It keeps the counter honest, not fraud-proof.</p>
+        <p data-sq>Çdo pajisje numërohet një herë për çdo degë (Kosovë ose diasporë), e zbatuar në server përmes një hash-i njëkahësh — kjo ndalon dyfishimin e rastësishëm, jo dikë të vendosur që fshin shfletuesin dhe ridërgon. Mban numëruesin të ndershëm, jo të pamundur për t'u manipuluar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="branch-select">
+  <div class="wrap">
+    <h2 class="section-title" data-en>Where do you live?</h2>
+    <h2 class="section-title" data-sq>Ku jeton?</h2>
+    <p class="section-sub" data-en>Pick the branch that fits you — the questions are a little different for each.</p>
+    <p class="section-sub" data-sq>Zgjidh degën që të përshtatet — pyetjet janë pak të ndryshme për secilën.</p>
+
+    <div class="branches">
+      <div class="branch-card" onclick="chooseBranch('kosovo')">
+        <h3 data-en>I live in Kosovo</h3>
+        <h3 data-sq>Jetoj në Kosovë</h3>
+        <p data-en>You're based in a Kosovo city, town, or village.</p>
+        <p data-sq>Jeton në një qytet, komunë apo fshat në Kosovë.</p>
+        <span class="pick" data-en>Start →</span>
+        <span class="pick" data-sq>Fillo →</span>
+      </div>
+      <div class="branch-card" onclick="chooseBranch('diaspora')">
+        <h3 data-en>I live outside Kosovo</h3>
+        <h3 data-sq>Jetoj jashtë Kosovës</h3>
+        <p data-en>You're part of the Albanian diaspora, living abroad.</p>
+        <p data-sq>Je pjesë e diasporës shqiptare, duke jetuar jashtë.</p>
+        <span class="pick" data-en>Start →</span>
+        <span class="pick" data-sq>Fillo →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="form-section">
+  <div class="wrap">
+
+    <!-- KOSOVO BRANCH -->
+    <form id="form-kosovo" class="form-card" data-track="kosovo">
+      <button type="button" class="change-branch" onclick="backToSelect()"><span data-en>← Change branch</span><span data-sq>← Ndrysho degën</span></button>
+
+      <fieldset>
+        <legend data-en>How old are you? <span class="req">*</span></legend>
+        <legend data-sq>Sa vjeç je? <span class="req">*</span></legend>
+        <div class="field"><input type="number" min="8" max="100" name="age" required></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>What city/village do you live in? <span class="req">*</span></legend>
+        <legend data-sq>Në cilin qytet/fshat jeton? <span class="req">*</span></legend>
+        <div class="field"><input type="text" name="location" required></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>How connected do you feel to Kosovo's history and independence? <span class="req">*</span></legend>
+        <legend data-sq>Nga 1-5, sa i lidhur ndihesh me historinë dhe pavarësinë e Kosovës? <span class="req">*</span></legend>
+        <div class="scale-group">
+          <label><input type="radio" name="connectedness" value="1" required><span>1</span></label>
+          <label><input type="radio" name="connectedness" value="2"><span>2</span></label>
+          <label><input type="radio" name="connectedness" value="3"><span>3</span></label>
+          <label><input type="radio" name="connectedness" value="4"><span>4</span></label>
+          <label><input type="radio" name="connectedness" value="5"><span>5</span></label>
+        </div>
+        <div class="scale-hint"><span data-en>Not very connected</span><span data-sq>Jo shumë i/e lidhur</span><span data-en>Very connected</span><span data-sq>Shumë i/e lidhur</span></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>What do you want to do after school — stay in Kosovo or go abroad? <span class="req">*</span></legend>
+        <legend data-sq>Çfarë do të bësh pas shkollës — të qëndrosh në Kosovë apo të shkosh jashtë? <span class="req">*</span></legend>
+        <div class="field">
+          <select name="after_school" required>
+            <option value="">— select / zgjidh —</option>
+            <option value="stay">Stay in Kosovo / Qëndroj në Kosovë</option>
+            <option value="abroad">Go abroad / Shkoj jashtë</option>
+            <option value="unsure">Not sure yet / Nuk jam i/e sigurt ende</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>Do you have family in the diaspora? <span class="req">*</span></legend>
+        <legend data-sq>A ke familje në diasporë? <span class="req">*</span></legend>
+        <div class="pill-group">
+          <label><input type="radio" name="family_diaspora" value="yes" required><span data-en>Yes</span><span data-sq>Po</span></label>
+          <label><input type="radio" name="family_diaspora" value="no"><span data-en>No</span><span data-sq>Jo</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>Do you feel Kosovo youth and diaspora youth understand each other? <span class="req">*</span></legend>
+        <legend data-sq>A mendon se rinia e Kosovës dhe ajo e diasporës e kuptojnë njëra-tjetrën? <span class="req">*</span></legend>
+        <div class="pill-group">
+          <label><input type="radio" name="mutual_understanding" value="yes" required><span data-en>Yes</span><span data-sq>Po</span></label>
+          <label><input type="radio" name="mutual_understanding" value="somewhat"><span data-en>Somewhat</span><span data-sq>Disi</span></label>
+          <label><input type="radio" name="mutual_understanding" value="no"><span data-en>No</span><span data-sq>Jo</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>What's the biggest challenge for youth in Kosovo today? <span class="opt">(optional)</span></legend>
+        <legend data-sq>Cili është sfida më e madhe për rininë sot në Kosovë? <span class="opt">(opsionale)</span></legend>
+        <div class="field"><textarea name="biggest_challenge"></textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>What makes you proud to be Albanian/Kosovar? <span class="opt">(optional)</span></legend>
+        <legend data-sq>Çfarë të bën krenar që je shqiptar/kosovar? <span class="opt">(opsionale)</span></legend>
+        <div class="field"><textarea name="pride"></textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>What's one thing you wish diaspora youth understood about growing up here? <span class="opt">(optional)</span></legend>
+        <legend data-sq>Çfarë do të doje ta kuptonte rinia e diasporës për të jetuar këtu? <span class="opt">(opsionale)</span></legend>
+        <div class="field"><textarea name="closer_message"></textarea></div>
+      </fieldset>
+
+      <div class="submit-row">
+        <button type="submit" class="submit"><span data-en>Submit</span><span data-sq>Dërgo</span></button>
+        <span class="submit-note" data-en>Anonymous — no name, phone, or email is collected.</span>
+        <span class="submit-note" data-sq>Anonime — nuk mblidhet emër, telefon apo email.</span>
+      </div>
+      <div class="status" id="status-kosovo"></div>
+    </form>
+
+    <!-- DIASPORA BRANCH -->
+    <form id="form-diaspora" class="form-card" data-track="diaspora">
+      <button type="button" class="change-branch" onclick="backToSelect()"><span data-en>← Change branch</span><span data-sq>← Ndrysho degën</span></button>
+
+      <fieldset>
+        <legend data-en>How old are you, and what country do you live in? <span class="req">*</span></legend>
+        <legend data-sq>Sa vjeç je dhe në cilin vend jeton? <span class="req">*</span></legend>
+        <div class="grid2">
+          <div class="field">
+            <label data-en>Age</label><label data-sq>Mosha</label>
+            <input type="number" min="8" max="100" name="age" required>
+          </div>
+          <div class="field">
+            <label data-en>Country</label><label data-sq>Shteti</label>
+            <input type="text" name="country" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>Do you speak Albanian? <span class="req">*</span></legend>
+        <legend data-sq>A flet shqip? <span class="req">*</span></legend>
+        <div class="pill-group">
+          <label><input type="radio" name="albanian_fluency" value="fluent" required><span data-en>Fluent</span><span data-sq>Rrjedhshëm</span></label>
+          <label><input type="radio" name="albanian_fluency" value="some"><span data-en>Some</span><span data-sq>Pak</span></label>
+          <label><input type="radio" name="albanian_fluency" value="none"><span data-en>Not at all</span><span data-sq>Aspak</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>How often do you visit Kosovo? <span class="req">*</span></legend>
+        <legend data-sq>Sa shpesh vjen në Kosovë? <span class="req">*</span></legend>
+        <div class="field">
+          <select name="visit_frequency" required>
+            <option value="">— select / zgjidh —</option>
+            <option value="yearly">Every year / Çdo vit</option>
+            <option value="few_years">Every few years / Çdo pak vite</option>
+            <option value="rarely">Rarely / Rrallë</option>
+            <option value="never">Never / Kurrë</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>Do you feel more connected to Kosovo, your home country, or both equally? <span class="req">*</span></legend>
+        <legend data-sq>Ndihesh më i lidhur me Kosovën, me vendin ku jeton, apo me të dyja njësoj? <span class="req">*</span></legend>
+        <div class="pill-group">
+          <label><input type="radio" name="connection" value="kosovo" required><span data-en>Kosovo</span><span data-sq>Kosovën</span></label>
+          <label><input type="radio" name="connection" value="home_country"><span data-en>Home country</span><span data-sq>Vendin ku jetoj</span></label>
+          <label><input type="radio" name="connection" value="both"><span data-en>Both equally</span><span data-sq>Të dyja njësoj</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>Do you see yourself living in Kosovo one day? <span class="req">*</span></legend>
+        <legend data-sq>A e sheh veten duke jetuar në Kosovë një ditë? <span class="req">*</span></legend>
+        <div class="pill-group">
+          <label><input type="radio" name="live_in_kosovo_someday" value="yes" required><span data-en>Yes</span><span data-sq>Po</span></label>
+          <label><input type="radio" name="live_in_kosovo_someday" value="maybe"><span data-en>Maybe</span><span data-sq>Ndoshta</span></label>
+          <label><input type="radio" name="live_in_kosovo_someday" value="no"><span data-en>No</span><span data-sq>Jo</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>What's hardest about connecting with Kosovo-based cousins/friends your age? <span class="opt">(optional)</span></legend>
+        <legend data-sq>Çfarë është më e vështira në lidhjen me kushërinjtë/shokët e moshës tënde në Kosovë? <span class="opt">(opsionale)</span></legend>
+        <div class="field"><textarea name="hardest_connecting"></textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>What does being Albanian mean to you, living abroad? <span class="opt">(optional)</span></legend>
+        <legend data-sq>Çfarë do të thotë të jesh shqiptar, duke jetuar jashtë? <span class="opt">(opsionale)</span></legend>
+        <div class="field"><textarea name="being_albanian_meaning"></textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>What would make you want to spend more time in Kosovo? <span class="opt">(optional)</span></legend>
+        <legend data-sq>Çfarë do të të bënte të duash të kalosh më shumë kohë në Kosovë? <span class="opt">(opsionale)</span></legend>
+        <div class="field"><textarea name="more_time_kosovo"></textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-en>What's one thing you wish Kosovo-based youth understood about growing up abroad? <span class="opt">(optional)</span></legend>
+        <legend data-sq>Çfarë do të doje ta kuptonte rinia e Kosovës për të jetuar jashtë? <span class="opt">(opsionale)</span></legend>
+        <div class="field"><textarea name="closer_message"></textarea></div>
+      </fieldset>
+
+      <div class="submit-row">
+        <button type="submit" class="submit"><span data-en>Submit</span><span data-sq>Dërgo</span></button>
+        <span class="submit-note" data-en>Anonymous — no name, phone, or email is collected.</span>
+        <span class="submit-note" data-sq>Anonime — nuk mblidhet emër, telefon apo email.</span>
+      </div>
+      <div class="status" id="status-diaspora"></div>
+    </form>
+
+    <!-- RESULT PANELS -->
+    <div class="result-panel" id="panel-thankyou">
+      <div class="big">🦅</div>
+      <h3 data-en>Faleminderit!</h3>
+      <h3 data-sq>Faleminderit!</h3>
+      <p data-en>Your answers are in — anonymously. Thank you for helping us understand how Kosovo and diaspora youth see things differently.</p>
+      <p data-sq>Përgjigjet tuaja u dërguan — në mënyrë anonime. Faleminderit që na ndihmuat të kuptojmë si rinia e Kosovës dhe e diasporës i shohin gjërat ndryshe.</p>
+    </div>
+
+    <div class="result-panel" id="panel-already">
+      <div class="big">✓</div>
+      <h3 data-en>Already counted</h3>
+      <h3 data-sq>Tashmë e numëruar</h3>
+      <p data-en>Looks like this device already submitted a response for this branch. Thanks for taking part — no need to send it again.</p>
+      <p data-sq>Duket se kjo pajisje ka dërguar tashmë një përgjigje për këtë degë. Faleminderit që morët pjesë — nuk ka nevojë ta ridërgoni.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span data-en>© 2026 FAME — Future Albanian Minds Empowered · Questions? founders@fame-kosovo.org</span>
+  <span data-sq>© 2026 FAME — Future Albanian Minds Empowered · Pyetje? founders@fame-kosovo.org</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  // ---------- language toggle ----------
+  function setLang(lang){
+    document.documentElement.classList.toggle('sq', lang === 'sq');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-sq').classList.toggle('active', lang === 'sq');
+    document.documentElement.setAttribute('lang', lang);
+    try{ localStorage.setItem('fame_lang', lang); }catch(e){}
+  }
+  (function initLang(){
+    var saved = null;
+    try{ saved = localStorage.getItem('fame_lang'); }catch(e){}
+    if(saved === 'sq') setLang('sq');
+  })();
+  function currentLang(){
+    return document.documentElement.classList.contains('sq') ? 'sq' : 'en';
+  }
+
+  // ---------- supabase ----------
+  var SUPABASE_URL = 'https://tstahknkokapphuitmac.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRzdGFoa25rb2thcHBodWl0bWFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MDg4NTAsImV4cCI6MjA5NTQ4NDg1MH0.NdKIbnfRhaDeibV2IJ3lwGRn859QMeRCmaV3LomuGHg';
+  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // ---------- goal (adjust freely, purely a UI target) ----------
+  var GOAL_TOTAL = 500;
+  var GOAL_SPLIT = 250; // each branch's mini-bar is scaled against this
+
+  // ---------- pseudonymous device id ----------
+  // A random id is generated once and kept in this browser only. Before it
+  // ever leaves the device it is SHA-256 hashed; only the hash is sent to
+  // the server, and the server never sees the raw id.
+  function getDeviceId(){
+    var KEY = 'fame_survey_device_id';
+    var id = null;
+    try{ id = localStorage.getItem(KEY); }catch(e){}
+    if(!id){
+      var arr = new Uint8Array(16);
+      crypto.getRandomValues(arr);
+      id = Array.from(arr).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+      try{ localStorage.setItem(KEY, id); }catch(e){}
+    }
+    return id;
+  }
+  async function sha256Hex(str){
+    var enc = new TextEncoder().encode(str);
+    var digest = await crypto.subtle.digest('SHA-256', enc);
+    return Array.from(new Uint8Array(digest)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+  }
+  function randomCode(len){
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var arr = new Uint8Array(len);
+    crypto.getRandomValues(arr);
+    return Array.from(arr).map(function(b){ return chars[b % chars.length]; }).join('');
+  }
+  function localDoneKey(track){ return 'fame_survey_done_' + track; }
+
+  // ---------- branch selection ----------
+  function chooseBranch(track){
+    document.getElementById('branch-select').style.display = 'none';
+    document.getElementById('panel-thankyou').classList.remove('show');
+    document.getElementById('panel-already').classList.remove('show');
+
+    var done = false;
+    try{ done = localStorage.getItem(localDoneKey(track)) === '1'; }catch(e){}
+
+    if(done){
+      document.getElementById('panel-already').classList.add('show');
+      document.getElementById('panel-already').scrollIntoView({behavior:'smooth', block:'start'});
+      return;
+    }
+
+    document.getElementById('form-kosovo').classList.toggle('show', track === 'kosovo');
+    document.getElementById('form-diaspora').classList.toggle('show', track === 'diaspora');
+    document.getElementById('form-' + track).scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  function backToSelect(){
+    document.getElementById('form-kosovo').classList.remove('show');
+    document.getElementById('form-diaspora').classList.remove('show');
+    document.getElementById('panel-thankyou').classList.remove('show');
+    document.getElementById('panel-already').classList.remove('show');
+    document.getElementById('branch-select').style.display = '';
+    document.getElementById('branch-select').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  // ---------- counter ----------
+  async function refreshCounter(){
+    try{
+      var res = await sb.rpc('youth_survey_counts');
+      if(res.error) throw res.error;
+      var rows = res.data || [];
+      var kosovo = 0, diaspora = 0;
+      rows.forEach(function(r){
+        if(r.track === 'kosovo') kosovo = Number(r.count) || 0;
+        if(r.track === 'diaspora') diaspora = Number(r.count) || 0;
+      });
+      var total = kosovo + diaspora;
+      document.getElementById('count-total').textContent = total;
+      document.getElementById('count-goal').textContent = GOAL_TOTAL;
+      document.getElementById('count-kosovo').textContent = kosovo;
+      document.getElementById('count-diaspora').textContent = diaspora;
+      document.getElementById('bar-total').style.width = Math.min(100, (total / GOAL_TOTAL) * 100) + '%';
+      document.getElementById('bar-kosovo').style.width = Math.min(100, (kosovo / GOAL_SPLIT) * 100) + '%';
+      document.getElementById('bar-diaspora').style.width = Math.min(100, (diaspora / GOAL_SPLIT) * 100) + '%';
+    }catch(e){
+      // Counter is a nice-to-have; a failure here shouldn't block the form.
+      console.error('counter fetch failed', e);
+    }
+  }
+  refreshCounter();
+
+  // ---------- form submission ----------
+  function showStatus(track, kind, textEn, textSq){
+    var el = document.getElementById('status-' + track);
+    el.className = 'status show ' + kind;
+    var lang = currentLang();
+    el.textContent = lang === 'sq' ? textSq : textEn;
+  }
+
+  function collectAnswers(form){
+    var data = new FormData(form);
+    var answers = {};
+    data.forEach(function(value, key){ answers[key] = value; });
+    return answers;
+  }
+
+  async function submitForm(track, form){
+    var btn = form.querySelector('button.submit');
+    btn.disabled = true;
+
+    var deviceId = getDeviceId();
+    var deviceHash = await sha256Hex(deviceId);
+    var answers = collectAnswers(form);
+    var lang = currentLang();
+
+    var row = {
+      track: track,
+      lang: lang,
+      answers: answers,
+      device_hash: deviceHash,
+      fam_code: randomCode(6)
+    };
+
+    var res = await sb.from('youth_survey_responses').insert(row);
+
+    if(res.error){
+      if(res.error.code === '23505'){
+        try{ localStorage.setItem(localDoneKey(track), '1'); }catch(e){}
+        form.classList.remove('show');
+        document.getElementById('panel-already').classList.add('show');
+        document.getElementById('panel-already').scrollIntoView({behavior:'smooth', block:'start'});
+      }else{
+        showStatus(track, 'err',
+          'Something went wrong sending your answers. Please try again in a moment.',
+          'Diçka shkoi keq gjatë dërgimit të përgjigjeve. Provoni përsëri pas pak.');
+        btn.disabled = false;
+      }
+      return;
+    }
+
+    try{ localStorage.setItem(localDoneKey(track), '1'); }catch(e){}
+    form.classList.remove('show');
+    document.getElementById('panel-thankyou').classList.add('show');
+    document.getElementById('panel-thankyou').scrollIntoView({behavior:'smooth', block:'start'});
+    refreshCounter();
+  }
+
+  document.getElementById('form-kosovo').addEventListener('submit', function(e){
+    e.preventDefault();
+    submitForm('kosovo', this);
+  });
+  document.getElementById('form-diaspora').addEventListener('submit', function(e){
+    e.preventDefault();
+    submitForm('diaspora', this);
+  });
+</script>
+
+</body>
+</html>
