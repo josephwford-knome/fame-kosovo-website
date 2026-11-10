@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAME — Find Your Place</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#C8102E; --black:#1A1A1A; --cream:#F9F6F0; --gold:#D4AF37; --stone:#8B8378;
+    --line: rgba(26,26,26,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--cream); color:var(--black); font-family:'Archivo',sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+
+  .topbar{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:14px 20px; background:var(--cream); border-bottom:1px solid var(--line); }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-mark{ width:30px;height:30px;border-radius:50%; background:var(--black); display:flex;align-items:center;justify-content:center; color:var(--gold); font-family:'Archivo Black';font-size:14px; }
+  .brand-word{ font-family:'Archivo Black',sans-serif; font-size:18px; letter-spacing:0.5px; }
+  .brand-word span{color:var(--red);}
+  .langtoggle{ display:flex; border:1.5px solid var(--black); border-radius:999px; overflow:hidden; }
+  .langtoggle button{ background:none;border:none;padding:6px 13px;cursor:pointer; font-family:'Archivo';font-weight:700;font-size:12px;color:var(--black); }
+  .langtoggle button.active{ background:var(--black); color:var(--cream); }
+
+  .hero{ padding:34px 20px 6px; text-align:center; }
+  .eyebrow{ font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--red); font-weight:800; margin-bottom:10px; }
+  .hero h1{ font-family:'Fraunces',serif; font-weight:600; font-style:italic; font-size:clamp(26px,7vw,40px); line-height:1.08; margin:0 0 14px; }
+  .hero p{ font-size:15px; line-height:1.55; color:#3a3a3a; max-width:500px; margin:0 auto; }
+
+  .roles{ display:flex; flex-direction:column; gap:12px; max-width:620px; margin:28px auto 6px; padding:0 20px; }
+  .role{ position:relative; border-radius:16px; padding:20px 20px 18px; cursor:pointer; color:var(--cream); text-align:left; border:none; font-family:'Archivo'; box-shadow:0 8px 22px rgba(0,0,0,0.12); transition:transform .2s ease; }
+  .role:hover, .role:focus-visible{ transform:translateY(-2px); outline:none; }
+  .role.c{ background:linear-gradient(200deg,var(--red),#8f0c22 75%); }
+  .role.j{ background:linear-gradient(160deg,#3a352e,#22201d 70%); }
+  .role.s{ background:linear-gradient(160deg,#22201d,var(--black) 65%); border-left:4px solid var(--gold); }
+  .role .tag{ font-size:10px; letter-spacing:2px; text-transform:uppercase; opacity:0.75; margin-bottom:6px; font-weight:700; }
+  .role h3{ font-family:'Archivo Black'; font-size:20px; margin:0 0 6px; line-height:1.15; }
+  .role p{ font-size:13px; opacity:0.88; margin:0; line-height:1.45; }
+  .role .arrow{ position:absolute; top:18px; right:18px; font-size:20px; color:var(--gold); }
+
+  .footnote{ text-align:center; font-size:11.5px; color:var(--stone); margin:18px auto 40px; max-width:460px; line-height:1.55; padding:0 20px; }
+
+  .wrap{ max-width:600px; margin:0 auto; padding:0 20px 80px; }
+  .card{ display:none; background:#fff; border:1px solid var(--line); border-radius:16px; padding:26px 22px 30px; margin-top:26px; animation:rise .5s ease both; }
+  .card.show{ display:block; }
+  @keyframes rise{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+  .progress-row{ display:flex; align-items:center; gap:10px; margin-bottom:22px; }
+  .progress-track{ flex:1; height:4px; background:var(--line); border-radius:99px; overflow:hidden; }
+  .progress-fill{ height:100%; background:var(--red); width:0%; transition:width .35s ease; }
+  .progress-label{ font-size:11px; color:var(--stone); font-weight:700; white-space:nowrap; }
+
+  .side-flag{ display:inline-block; font-size:10px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:4px 10px; border-radius:99px; margin-bottom:14px; background:rgba(200,16,46,0.09); color:var(--red); }
+
+  .q label.ql{ display:block; font-family:'Fraunces'; font-weight:600; font-size:18px; line-height:1.35; margin-bottom:6px; }
+  .q .hint{ font-size:12.5px; color:var(--stone); margin:0 0 12px; line-height:1.45; }
+  .field{ margin-bottom:14px; }
+  .field span{ display:block; font-size:12.5px; font-weight:700; margin-bottom:5px; }
+  .q input[type=text], .q input[type=email], .q input[type=tel], .q input[type=url], .q input[type=number], .q select, .q textarea{
+    width:100%; padding:11px 12px; border:1.5px solid var(--line); border-radius:10px; font-family:'Archivo'; font-size:14.5px; background:var(--cream); color:var(--black);
+  }
+  .q textarea{ min-height:96px; resize:vertical; }
+  .q input:focus, .q select:focus, .q textarea:focus{ outline:none; border-color:var(--red); }
+
+  .choice-col{ display:flex; flex-direction:column; gap:8px; }
+  .choice-col button{ text-align:left; padding:12px 14px; border:1.5px solid var(--line); background:var(--cream); border-radius:12px; font-weight:600; cursor:pointer; font-family:'Archivo'; font-size:14px; color:var(--black); line-height:1.35; }
+  .choice-col button.sel{ background:var(--black); border-color:var(--black); color:var(--cream); }
+  .choice-col button.sel::before{ content:'✓  '; color:var(--gold); font-weight:800; }
+
+  .check{ display:flex; gap:10px; align-items:flex-start; font-size:13px; line-height:1.45; margin:10px 0; cursor:pointer; }
+  .check input{ margin-top:3px; width:18px; height:18px; accent-color:var(--red); flex-shrink:0; }
+
+  .note{ background:rgba(212,175,55,0.1); border:1px solid var(--gold); border-radius:12px; padding:12px 14px; font-size:12.5px; color:#5a4a10; margin-bottom:18px; line-height:1.5; }
+  .err{ display:none; color:var(--red); font-size:12.5px; font-weight:700; margin-top:10px; }
+  .err.show{ display:block; }
+
+  .nav-row{ display:flex; justify-content:space-between; align-items:center; margin-top:26px; }
+  .btn{ font-family:'Archivo'; font-weight:800; font-size:13.5px; letter-spacing:0.3px; padding:12px 22px; border-radius:10px; border:none; cursor:pointer; }
+  .btn-primary{ background:var(--black); color:var(--gold); }
+  .btn-ghost{ background:none; color:var(--stone); font-weight:700; }
+  .btn:disabled{ opacity:0.35; cursor:not-allowed; }
+
+  .confirm{ text-align:center; padding:20px 4px 6px; }
+  .confirm h2{ font-family:'Fraunces'; font-style:italic; font-weight:600; font-size:24px; margin-bottom:6px; }
+  .confirm p{ font-size:14px; color:#444; line-height:1.55; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><div class="brand-mark">F</div><div class="brand-word">FAME<span>.</span></div></div>
+  <div class="langtoggle">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-al" onclick="setLang('al')">SHQ</button>
+  </div>
+</div>
+
+<div id="landing">
+  <div class="hero">
+    <div class="eyebrow" data-t="eyebrow">FAME — Future Albanian Minds Empowered</div>
+    <h1 data-t="h1">Find your place in FAME.</h1>
+    <p data-t="hero-p">This isn't a test and it isn't a job application. It's a few honest questions to help you discover where your gifts, interests and time fit best — and to help us get to know you. Pick the role closest to you.</p>
+  </div>
+
+  <div class="roles">
+    <button class="role c" onclick="start('committee')">
+      <span class="arrow">→</span>
+      <div class="tag" data-t="c-tag">University students · 18+</div>
+      <h3 data-t="c-h3">Youth Committee</h3>
+      <p data-t="c-p">5–6 students per region who lead the regional SWOT, guide the Junior Advisors, and bring local knowledge into FAME's planning.</p>
+    </button>
+    <button class="role j" onclick="start('junior')">
+      <span class="arrow">→</span>
+      <div class="tag" data-t="j-tag">Under 18 · with a parent's OK</div>
+      <h3 data-t="j-h3">Junior Advisor</h3>
+      <p data-t="j-p">Share what young people in your town think and need — always with adult support and through your regional Youth Committee.</p>
+    </button>
+    <button class="role s" onclick="start('senior')">
+      <span class="arrow">→</span>
+      <div class="tag" data-t="s-tag">Professors · officials · professionals</div>
+      <h3 data-t="s-h3">Senior Advisor</h3>
+      <p data-t="s-p">Mentor a regional Youth Committee and lend your experience, judgment and networks to the next generation.</p>
+    </button>
+  </div>
+
+  <div class="footnote" data-t="privacy">Your answers go only to the FAME founders and are used only to follow up with you. We never publish them and will delete them on request: Founders@fame-kosovo.org. If you're under 18, a parent or guardian completes the last step with you.</div>
+</div>
+
+<div class="wrap">
+  <div class="card" id="card-q">
+    <span class="side-flag" id="flag"></span>
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+      <div class="progress-label"><span id="step">1</span>/<span id="total">1</span></div>
+    </div>
+    <div class="q" id="qbox"></div>
+    <div class="err" id="err"></div>
+    <div class="nav-row">
+      <button class="btn btn-ghost" onclick="prev()" id="back">‹ <span data-t="back">Back</span></button>
+      <button class="btn btn-primary" onclick="next()" id="next"></button>
+    </div>
+  </div>
+
+  <div class="card" id="card-done">
+    <div class="confirm">
+      <h2 data-t="done-h2">Faleminderit. Thank you.</h2>
+      <p id="done-p"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ CONFIG ============ */
+const FORMSPREE = "https://formspree.io/f/meeywdkb";   // same form as apply.html
+const FORM_VERSION = "discernment-v1";
+
+/* ============ UI TEXT ============ */
+const T = {
+en:{
+  eyebrow:"FAME — Future Albanian Minds Empowered",
+  h1:"Find your place in FAME.",
+  "hero-p":"This isn't a test and it isn't a job application. It's a few honest questions to help you discover where your gifts, interests and time fit best — and to help us get to know you. Pick the role closest to you.",
+  "c-tag":"University students · 18+", "c-h3":"Youth Committee",
+  "c-p":"5–6 students per region who lead the regional SWOT, guide the Junior Advisors, and bring local knowledge into FAME's planning.",
+  "j-tag":"Under 18 · with a parent's OK", "j-h3":"Junior Advisor",
+  "j-p":"Share what young people in your town think and need — always with adult support and through your regional Youth Committee.",
+  "s-tag":"Professors · officials · professionals", "s-h3":"Senior Advisor",
+  "s-p":"Mentor a regional Youth Committee and lend your experience, judgment and networks to the next generation.",
+  privacy:"Your answers go only to the FAME founders and are used only to follow up with you. We never publish them and will delete them on request: Founders@fame-kosovo.org. If you're under 18, a parent or guardian completes the last step with you.",
+  back:"Back", next:"Next ›", submit:"Send ✓", sending:"Sending…",
+  pickUpTo:"Pick up to", optional:"Optional",
+  required:"Please answer this one before moving on.",
+  requiredFields:"Please fill in the required fields and tick the boxes.",
+  tooOld:"Junior Advisor is for under-18s. If you're 18 or older, please go back and choose Youth Committee.",
+  sendFail:"Something went wrong sending your answers. Please try again, or write to Founders@fame-kosovo.org.",
+  "done-h2":"Faleminderit. Thank you.",
+  doneAdult:"Your answers are with the FAME founders. One of us — Behar, Joseph or a regional organizer — will be in touch to talk it through with you. No pressure: this is the start of a conversation, not a commitment.",
+  doneJunior:"Your answers are with the FAME founders. We will contact your parent or guardian first — not you directly — to talk about next steps together."
+},
+al:{
+  eyebrow:"FAME — Mendjet e Reja Shqiptare të Fuqizuara",
+  h1:"Gjej vendin tënd në FAME.",
+  "hero-p":"Ky nuk është test dhe as aplikim për punë. Janë disa pyetje të sinqerta që të ndihmojnë të zbulosh ku përshtaten më mirë dhuntitë, interesat dhe koha jote — dhe që na ndihmojnë të të njohim. Zgjidh rolin që të përshtatet më shumë.",
+  "c-tag":"Studentë universitarë · 18+", "c-h3":"Komiteti Rinor",
+  "c-p":"5–6 studentë për rajon që udhëheqin analizën rajonale SWOT, udhëzojnë Këshilltarët e Rinj dhe sjellin njohuritë lokale në planifikimin e FAME.",
+  "j-tag":"Nën 18 vjeç · me lejen e prindit", "j-h3":"Këshilltar i Ri",
+  "j-p":"Trego çfarë mendojnë dhe çfarë u nevojitet të rinjve në vendin tënd — gjithmonë me mbështetjen e të rriturve dhe përmes Komitetit Rinor të rajonit tënd.",
+  "s-tag":"Profesorë · zyrtarë · profesionistë", "s-h3":"Këshilltar i Lartë",
+  "s-p":"Mentoro një Komitet Rinor rajonal dhe ndaj përvojën, gjykimin dhe rrjetet e tua me gjeneratën e ardhshme.",
+  privacy:"Përgjigjet e tua shkojnë vetëm te themeluesit e FAME dhe përdoren vetëm për të të kontaktuar. Nuk i publikojmë kurrë dhe i fshijmë me kërkesë: Founders@fame-kosovo.org. Nëse je nën 18 vjeç, hapin e fundit e plotëson bashkë me prindin ose kujdestarin.",
+  back:"Prapa", next:"Tjetra ›", submit:"Dërgo ✓", sending:"Duke dërguar…",
+  pickUpTo:"Zgjidh deri në", optional:"Opsionale",
+  required:"Të lutem përgjigju kësaj pyetjeje para se të vazhdosh.",
+  requiredFields:"Të lutem plotëso fushat e detyrueshme dhe shëno kutitë.",
+  tooOld:"Roli i Këshilltarit të Ri është për të rinjtë nën 18 vjeç. Nëse je 18 vjeç ose më shumë, kthehu prapa dhe zgjidh Komitetin Rinor.",
+  sendFail:"Diçka shkoi keq gjatë dërgimit. Provo përsëri, ose na shkruaj në Founders@fame-kosovo.org.",
+  "done-h2":"Faleminderit shumë.",
+  doneAdult:"Përgjigjet e tua janë te themeluesit e FAME. Njëri prej nesh — Behari, Joseph ose një organizator rajonal — do të të kontaktojë për të biseduar. Pa presion: ky është fillimi i një bisede, jo një angazhim.",
+  doneJunior:"Përgjigjet e tua janë te themeluesit e FAME. Do të kontaktojmë së pari prindin ose kujdestarin tënd — jo ty drejtpërdrejt — për të biseduar së bashku për hapat e ardhshëm."
+}};
+
+/* ============ SHARED OPTION LISTS ============ */
+const REGIONS = [
+  {v:"Prishtina", en:"Prishtina", al:"Prishtinë"},
+  {v:"Mitrovica", en:"Mitrovica", al:"Mitrovicë"},
+  {v:"Peja", en:"Peja", al:"Pejë"},
+  {v:"Prizren", en:"Prizren (incl. Dragash, Rahovec, Suharekë, Mamushë)", al:"Prizren (përfshirë Dragashin, Rahovecin, Suharekën, Mamushën)"},
+  {v:"Ferizaj", en:"Ferizaj", al:"Ferizaj"},
+  {v:"Gjilan", en:"Gjilan", al:"Gjilan"},
+  {v:"Gjakova", en:"Gjakova", al:"Gjakovë"},
+  {v:"Diaspora", en:"I live in the diaspora", al:"Jetoj në diasporë"}
+];
+const L = (en, al) => ({en, al});
+
+/* ============ QUESTION BANKS ============ */
+const QB = {
+committee:{
+  name:L("Youth Committee","Komiteti Rinor"),
+  steps:[
+    {id:"region", type:"select", required:true, opts:REGIONS,
+      label:L("Which region would you serve?","Cilin rajon do të shërbeje?")},
+    {id:"municipality", type:"text",
+      label:L("Which municipality, town or village do you know best?","Cilën komunë, qytet ose fshat e njeh më mirë?"),
+      hint:L("The place you could map with real insight in the regional SWOT.","Vendi që mund ta analizosh me njohuri të vërteta në analizën rajonale SWOT.")},
+    {id:"studies", type:"text",
+      label:L("What are you studying, and where?","Çfarë studion dhe ku?")},
+    {id:"draws", type:"multi", max:3, required:true,
+      label:L("Which parts of FAME's work pull at you most?","Cilat pjesë të punës së FAME të tërheqin më shumë?"),
+      opts:[
+        {v:"Regional SWOT", en:"Regional SWOT — mapping the strengths and needs of my municipality", al:"Analiza rajonale SWOT — të hartoj përparësitë dhe nevojat e komunës sime"},
+        {v:"Education", en:"Education — the Student Challenge and learning in schools", al:"Arsimi — Sfida e Nxënësve dhe të nxënit në shkolla"},
+        {v:"Wellbeing", en:"Health and wellbeing of young people", al:"Shëndeti dhe mirëqenia e të rinjve"},
+        {v:"Technology", en:"Technology — building and testing the FAME app", al:"Teknologjia — ndërtimi dhe testimi i aplikacionit FAME"},
+        {v:"Storytelling", en:"Storytelling — video, photo, writing, social media", al:"Rrëfimi — video, foto, shkrim, rrjete sociale"},
+        {v:"Teachers campaign", en:"#FaleminderitMësuesit — honouring Kosovo's teachers", al:"#FaleminderitMësuesit — nderimi i mësuesve të Kosovës"},
+        {v:"Diaspora", en:"Connecting young people at home and in the diaspora", al:"Lidhja e të rinjve në vendlindje dhe në diasporë"},
+        {v:"Organizing", en:"Organizing — meetings, events, a youth summit", al:"Organizimi — takime, ngjarje, një samit rinor"},
+        {v:"Grants & research", en:"Grants, research and writing proposals", al:"Grante, kërkime dhe shkrim projektesh"}
+      ]},
+    {id:"gifts", type:"textarea",
+      label:L("What are you good at — the thing friends or classmates come to you for?","Në çfarë je i mirë — për çfarë vijnë te ti shokët ose kolegët?")},
+    {id:"style", type:"choice", required:true,
+      label:L("How do you most like to contribute?","Si të pëlqen më shumë të kontribuosh?"),
+      opts:[
+        {v:"Lead", en:"Lead a team and keep things moving", al:"Udhëheq një ekip dhe i mbaj gjërat në lëvizje"},
+        {v:"Team member", en:"Be a reliable member of a strong team", al:"Jam anëtar i besueshëm i një ekipi të fortë"},
+        {v:"Research & write", en:"Research, analyze and write", al:"Hulumtoj, analizoj dhe shkruaj"},
+        {v:"Connect people", en:"Connect people and open doors", al:"Lidh njerëz dhe hap dyer"},
+        {v:"Make things", en:"Make things — design, code, media", al:"Krijoj gjëra — dizajn, kod, media"}
+      ]},
+    {id:"organize", type:"choice", required:true,
+      label:L("Would you be interested in helping organize the Youth Committee in your region?","A do të ishe i interesuar të ndihmosh në organizimin e Komitetit Rinor në rajonin tënd?"),
+      hint:L("That means helping recruit the other members and coordinating with a Senior Advisor and the founders.","Kjo do të thotë të ndihmosh në rekrutimin e anëtarëve të tjerë dhe në koordinimin me një Këshilltar të Lartë dhe me themeluesit."),
+      opts:[
+        {v:"Yes, lead", en:"Yes — I'd like to lead it", al:"Po — do të doja ta udhëheq"},
+        {v:"Yes, co-organize", en:"Yes — as a co-organizer with others", al:"Po — si bashkëorganizator me të tjerët"},
+        {v:"Not now", en:"Not now — I'd rather contribute as a member", al:"Jo tani — preferoj të kontribuoj si anëtar"},
+        {v:"Let's talk", en:"Not sure — let's talk about it", al:"Nuk jam i sigurt — le të flasim"}
+      ]},
+    {id:"time", type:"choice", required:true,
+      label:L("Realistically, how much time could you give each month?","Realisht, sa kohë mund të japësh çdo muaj?"),
+      opts:[
+        {v:"2-4h", en:"2–4 hours", al:"2–4 orë"},
+        {v:"4-6h", en:"4–6 hours", al:"4–6 orë"},
+        {v:"6h+", en:"More than 6 hours", al:"Më shumë se 6 orë"},
+        {v:"Varies", en:"It varies with exams and work", al:"Ndryshon sipas provimeve dhe punës"}
+      ]},
+    {id:"problem", type:"textarea",
+      label:L("What problem facing young people in your town would you most like to help solve?","Cilin problem të të rinjve në vendin tënd do të doje më shumë të ndihmosh ta zgjidhësh?")},
+    {id:"learn", type:"textarea",
+      label:L("What do you hope to learn or gain from FAME?","Çfarë shpreson të mësosh ose të fitosh nga FAME?")},
+    {id:"advisor", type:"textarea", optional:true,
+      label:L("Do you know a professor, official or professional who might mentor your region's Committee?","A njeh ndonjë profesor, zyrtar ose profesionist që mund të mentorojë Komitetin e rajonit tënd?"),
+      hint:L("Just their name and role is enough — we'll reach out respectfully.","Mjafton emri dhe roli — do t'i kontaktojmë me respekt.")},
+    {id:"contact", type:"contact",
+      label:L("Last step — how can we reach you?","Hapi i fundit — si mund të të kontaktojmë?"),
+      fields:[
+        {id:"name", type:"text", required:true, label:L("Full name","Emri dhe mbiemri")},
+        {id:"email", type:"email", required:true, label:L("Email","Email")},
+        {id:"phone", type:"tel", label:L("Phone / WhatsApp (optional)","Telefoni / WhatsApp (opsionale)")}
+      ],
+      checks:[
+        {id:"is_adult", required:true, label:L("I confirm I am 18 or older.","Konfirmoj se jam 18 vjeç ose më shumë.")},
+        {id:"consent", required:true, label:L("FAME may use my answers to contact me about volunteering. They won't be published or shared outside the founding team.","FAME mund t'i përdorë përgjigjet e mia për të më kontaktuar rreth vullnetarizmit. Ato nuk do të publikohen dhe as nuk do të ndahen jashtë ekipit themelues.")}
+      ]}
+  ]},
+
+junior:{
+  name:L("Junior Advisor","Këshilltar i Ri"),
+  steps:[
+    {id:"age", type:"number", required:true, maxAge:17,
+      label:L("How old are you?","Sa vjeç je?")},
+    {id:"region", type:"select", required:true, opts:REGIONS.filter(r=>r.v!=="Diaspora"),
+      label:L("Which region do you live in?","Në cilin rajon jeton?")},
+    {id:"town", type:"text",
+      label:L("Which town or village?","Në cilin qytet ose fshat?")},
+    {id:"likes", type:"multi", max:3, required:true,
+      label:L("Which of these sound fun to you?","Cilat nga këto të duken interesante?"),
+      opts:[
+        {v:"Share ideas", en:"Sharing ideas about my school and my town", al:"Të ndaj ide për shkollën dhe vendin tim"},
+        {v:"Surveys", en:"Helping with youth surveys", al:"Të ndihmoj me pyetësorë për të rinjtë"},
+        {v:"Create", en:"Making videos, photos or art (with an adult helping)", al:"Të bëj video, foto ose art (me ndihmën e një të rrituri)"},
+        {v:"Test app", en:"Trying the FAME learning app and saying what works", al:"Të provoj aplikacionin e të nxënit FAME dhe të them çfarë funksionon"},
+        {v:"Talk with peers", en:"Talking with other young people about the future", al:"Të flas me të rinj të tjerë për të ardhmen"},
+        {v:"Plan events", en:"Helping plan youth events", al:"Të ndihmoj në planifikimin e ngjarjeve rinore"}
+      ]},
+    {id:"love", type:"textarea",
+      label:L("What do you love doing — at school or outside it?","Çfarë të pëlqen të bësh — në shkollë apo jashtë saj?")},
+    {id:"change", type:"textarea",
+      label:L("If you could change one thing for young people in your town, what would it be?","Nëse do të mund të ndryshoje një gjë për të rinjtë në vendin tënd, çfarë do të ishte?")},
+    {id:"share", type:"choice", required:true,
+      label:L("How do you like to share your ideas?","Si të pëlqen t'i ndash idetë e tua?"),
+      opts:[
+        {v:"Group", en:"Talking in a group", al:"Duke folur në grup"},
+        {v:"Writing", en:"Writing them down", al:"Duke i shkruar"},
+        {v:"Making", en:"Making something — a drawing, a video, a model", al:"Duke krijuar diçka — një vizatim, një video, një model"},
+        {v:"One-on-one", en:"One-on-one with someone I trust", al:"Ballë për ballë me dikë që i besoj"}
+      ]},
+    {id:"learn", type:"textarea",
+      label:L("What would you like to learn by being part of FAME?","Çfarë do të doje të mësosh duke qenë pjesë e FAME?")},
+    {id:"contact", type:"contact",
+      label:L("Last step — with your parent or guardian","Hapi i fundit — bashkë me prindin ose kujdestarin"),
+      note:L("Please complete this step together with your parent or guardian. FAME contacts the parent or guardian first, never the young person directly.","Të lutem plotësoje këtë hap bashkë me prindin ose kujdestarin. FAME kontakton së pari prindin ose kujdestarin, kurrë drejtpërdrejt të riun."),
+      fields:[
+        {id:"first_name", type:"text", required:true, label:L("Your first name","Emri yt")},
+        {id:"guardian_name", type:"text", required:true, label:L("Parent or guardian — full name","Prindi ose kujdestari — emri dhe mbiemri")},
+        {id:"guardian_email", type:"email", required:true, label:L("Parent or guardian — email","Prindi ose kujdestari — email")},
+        {id:"guardian_phone", type:"tel", label:L("Parent or guardian — phone / WhatsApp (optional)","Prindi ose kujdestari — telefoni / WhatsApp (opsionale)")}
+      ],
+      checks:[
+        {id:"guardian_consent", required:true, label:L("I am this young person's parent or guardian. I agree to FAME contacting me about the Junior Advisor role. Nothing is decided until we have talked and I have signed the written permission form.","Jam prindi ose kujdestari i këtij të riu/kësaj të reje. Pranoj që FAME të më kontaktojë rreth rolit të Këshilltarit të Ri. Asgjë nuk vendoset pa biseduar dhe pa nënshkruar formularin me shkrim të lejes.")}
+      ]}
+  ]},
+
+senior:{
+  name:L("Senior Advisor","Këshilltar i Lartë"),
+  steps:[
+    {id:"region", type:"select", required:true,
+      opts:REGIONS.concat([{v:"Any", en:"Not tied to one region", al:"Jo i lidhur me një rajon të vetëm"}]),
+      label:L("Which region would you most like to support?","Cilin rajon do të doje më shumë të mbështesësh?")},
+    {id:"position", type:"text",
+      label:L("What is your current (or most recent) role and organization?","Cili është roli dhe institucioni yt aktual (ose i fundit)?")},
+    {id:"expertise", type:"multi", max:3, required:true,
+      label:L("Where does your experience run deepest?","Ku është përvoja jote më e thellë?"),
+      opts:[
+        {v:"Political economy & policy", en:"Political economy and public policy", al:"Ekonomia politike dhe politikat publike"},
+        {v:"Education", en:"Education and pedagogy", al:"Arsimi dhe pedagogjia"},
+        {v:"Health & psychology", en:"Health, public health or psychology", al:"Shëndetësia, shëndeti publik ose psikologjia"},
+        {v:"Technology & data", en:"Technology and data", al:"Teknologjia dhe të dhënat"},
+        {v:"Entrepreneurship", en:"Entrepreneurship and business", al:"Sipërmarrja dhe biznesi"},
+        {v:"Law & governance", en:"Law, governance and public administration", al:"Drejtësia, qeverisja dhe administrata publike"},
+        {v:"EU & funding", en:"EU integration and international funding", al:"Integrimi në BE dhe financimi ndërkombëtar"},
+        {v:"Media", en:"Media and communications", al:"Media dhe komunikimi"}
+      ]},
+    {id:"offer", type:"multi", max:4, required:true,
+      label:L("What would you be glad to offer?","Çfarë do të ofroje me kënaqësi?"),
+      opts:[
+        {v:"Mentor committee", en:"Mentor a regional Youth Committee", al:"Të mentoroj një Komitet Rinor rajonal"},
+        {v:"Review SWOT", en:"Review and challenge their SWOT findings", al:"Të shqyrtoj dhe sfidoj gjetjet e tyre SWOT"},
+        {v:"Open doors", en:"Open doors to institutions and decision-makers", al:"Të hap dyer te institucionet dhe vendimmarrësit"},
+        {v:"Grants advice", en:"Advise on grants and EU programmes", al:"Të këshilloj për grante dhe programe të BE-së"},
+        {v:"Guest session", en:"Lead an occasional guest session or talk", al:"Të mbaj herë pas here një sesion ose ligjëratë"},
+        {v:"Advisory board", en:"Be considered for FAME's future advisory board", al:"Të merrem parasysh për bordin e ardhshëm këshillëdhënës të FAME"}
+      ]},
+    {id:"rhythm", type:"choice", required:true,
+      label:L("What mentoring rhythm suits you?","Cili ritëm mentorimi të përshtatet?"),
+      opts:[
+        {v:"Monthly", en:"A monthly check-in", al:"Një takim në muaj"},
+        {v:"Quarterly", en:"A quarterly review", al:"Një shqyrtim çdo tre muaj"},
+        {v:"As needed", en:"As needed, when they ask", al:"Sipas nevojës, kur ata kërkojnë"},
+        {v:"Let's talk", en:"Let's discuss", al:"Le ta diskutojmë"}
+      ]},
+    {id:"need", type:"textarea",
+      label:L("What do young people in Kosovo most need from your generation?","Çfarë u nevojitet më shumë të rinjve në Kosovë nga gjenerata juaj?")},
+    {id:"worth", type:"textarea",
+      label:L("What would make this worth your time?","Çfarë do ta bënte këtë të vlefshme për kohën tuaj?")},
+    {id:"contact", type:"contact",
+      label:L("Last step — how can we reach you?","Hapi i fundit — si mund t'ju kontaktojmë?"),
+      fields:[
+        {id:"name", type:"text", required:true, label:L("Full name and title","Emri, mbiemri dhe titulli")},
+        {id:"email", type:"email", required:true, label:L("Email","Email")},
+        {id:"phone", type:"tel", label:L("Phone / WhatsApp (optional)","Telefoni / WhatsApp (opsionale)")},
+        {id:"linkedin", type:"url", label:L("LinkedIn (optional)","LinkedIn (opsionale)")}
+      ],
+      checks:[
+        {id:"consent", required:true, label:L("FAME may use my answers to contact me about advising. They won't be published or shared outside the founding team.","FAME mund t'i përdorë përgjigjet e mia për të më kontaktuar rreth këshillimit. Ato nuk do të publikohen dhe as nuk do të ndahen jashtë ekipit themelues.")}
+      ]}
+  ]}
+};
+
+/* ============ STATE ============ */
+let lang = 'en';
+const state = { role:null, idx:0, answers:{} };
+
+function esc(s){ return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function setLang(l){
+  lang = l;
+  document.documentElement.lang = (l === 'al') ? 'sq' : 'en';
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.getElementById('btn-al').classList.toggle('active', l==='al');
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const k = el.getAttribute('data-t');
+    if(T[l][k]) el.textContent = T[l][k];
+  });
+  if(state.role) render();
+  const dp = document.getElementById('done-p');
+  if(dp.dataset.kind) dp.textContent = T[lang][dp.dataset.kind];
+}
+
+function start(role){
+  state.role = role; state.idx = 0; state.answers = {};
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('card-q').classList.add('show');
+  render();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function render(){
+  const bank = QB[state.role];
+  const q = bank.steps[state.idx];
+  const total = bank.steps.length;
+  document.getElementById('flag').textContent = bank.name[lang];
+  document.getElementById('fill').style.width = (((state.idx+1)/total)*100) + '%';
+  document.getElementById('step').textContent = state.idx+1;
+  document.getElementById('total').textContent = total;
+  document.getElementById('back').disabled = false;
+  document.getElementById('next').textContent = (state.idx === total-1) ? T[lang].submit : T[lang].next;
+  document.getElementById('err').classList.remove('show');
+
+  const a = state.answers;
+  let h = `<label class="ql">${esc(q.label[lang])}</label>`;
+  let hint = q.hint ? q.hint[lang] : '';
+  if(q.type === 'multi') hint = `${T[lang].pickUpTo} ${q.max}.` + (hint ? ' ' + hint : '');
+  if(q.optional) hint = `${T[lang].optional}. ` + hint;
+  if(hint) h += `<p class="hint">${esc(hint)}</p>`;
+
+  if(q.type === 'text' || q.type === 'number'){
+    h += `<input type="${q.type}" ${q.type==='number'?'min="5" max="99" inputmode="numeric"':''} value="${esc(a[q.id])}" oninput="save('${q.id}',this.value)">`;
+  } else if(q.type === 'textarea'){
+    h += `<textarea oninput="save('${q.id}',this.value)">${esc(a[q.id])}</textarea>`;
+  } else if(q.type === 'select'){
+    h += `<select onchange="save('${q.id}',this.value)"><option value="">—</option>` +
+      q.opts.map(o=>`<option value="${esc(o.v)}" ${a[q.id]===o.v?'selected':''}>${esc(o[lang])}</option>`).join('') + `</select>`;
+  } else if(q.type === 'choice' || q.type === 'multi'){
+    const cur = a[q.id];
+    h += `<div class="choice-col">` + q.opts.map((o,i)=>{
+      const on = q.type==='multi' ? (cur||[]).includes(o.v) : cur===o.v;
+      return `<button type="button" class="${on?'sel':''}" onclick="pick(${i})">${esc(o[lang])}</button>`;
+    }).join('') + `</div>`;
+  } else if(q.type === 'contact'){
+    if(q.note) h += `<div class="note">${esc(q.note[lang])}</div>`;
+    h += q.fields.map(f=>`<div class="field"><span>${esc(f.label[lang])}${f.required?' *':''}</span>
+      <input type="${f.type}" value="${esc(a[f.id])}" oninput="save('${f.id}',this.value)"></div>`).join('');
+    h += q.checks.map(c=>`<label class="check"><input type="checkbox" ${a[c.id]?'checked':''} onchange="save('${c.id}',this.checked)"><span>${esc(c.label[lang])}</span></label>`).join('');
+  }
+  document.getElementById('qbox').innerHTML = h;
+}
+
+function save(id, val){ state.answers[id] = val; }
+
+function pick(i){
+  const q = QB[state.role].steps[state.idx];
+  const o = q.opts[i];
+  if(q.type === 'choice'){
+    state.answers[q.id] = o.v;
+  } else {
+    let cur = state.answers[q.id] || [];
+    if(cur.includes(o.v)) cur = cur.filter(x=>x!==o.v);
+    else if(cur.length < q.max) cur = cur.concat(o.v);
+    state.answers[q.id] = cur;
+  }
+  render();
+}
+
+function showErr(msg){ const e = document.getElementById('err'); e.textContent = msg; e.classList.add('show'); }
+
+function valid(q){
+  const a = state.answers;
+  if(q.type === 'contact'){
+    const okFields = q.fields.every(f => !f.required || (a[f.id] && String(a[f.id]).trim()));
+    const okEmails = q.fields.every(f => f.type!=='email' || !a[f.id] || /^\S+@\S+\.\S+$/.test(a[f.id]));
+    const okChecks = q.checks.every(c => !c.required || a[c.id] === true);
+    if(!(okFields && okEmails && okChecks)){ showErr(T[lang].requiredFields); return false; }
+    return true;
+  }
+  const v = a[q.id];
+  const empty = v === undefined || v === '' || (Array.isArray(v) && v.length === 0);
+  if(q.required && empty){ showErr(T[lang].required); return false; }
+  if(q.maxAge !== undefined && Number(v) > q.maxAge){ showErr(T[lang].tooOld); return false; }
+  return true;
+}
+
+function prev(){
+  if(state.idx > 0){ state.idx--; render(); }
+  else {
+    document.getElementById('card-q').classList.remove('show');
+    document.getElementById('landing').style.display = '';
+    state.role = null;
+  }
+}
+
+function next(){
+  const bank = QB[state.role];
+  const q = bank.steps[state.idx];
+  if(!valid(q)) return;
+  if(state.idx < bank.steps.length - 1){ state.idx++; render(); window.scrollTo({top:0, behavior:'smooth'}); }
+  else submit();
+}
+
+async function submit(){
+  const btn = document.getElementById('next');
+  btn.disabled = true; btn.textContent = T[lang].sending;
+  const bank = QB[state.role];
+  const payload = {
+    _subject: `FAME — ${bank.name.en} discernment` + (state.answers.region ? ` (${state.answers.region})` : ''),
+    form: FORM_VERSION,
+    role: bank.name.en,
+    language: lang
+  };
+  Object.entries(state.answers).forEach(([k,v])=>{ payload[k] = Array.isArray(v) ? v.join('; ') : v; });
+  if(payload.email) payload._replyto = payload.email;
+  if(payload.guardian_email) payload._replyto = payload.guardian_email;
+
+  try{
+    const res = await fetch(FORMSPREE, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    document.getElementById('card-q').classList.remove('show');
+    document.getElementById('card-done').classList.add('show');
+    const dp = document.getElementById('done-p');
+    dp.dataset.kind = (state.role === 'junior') ? 'doneJunior' : 'doneAdult';
+    dp.textContent = T[lang][dp.dataset.kind];
+    window.scrollTo({top:0, behavior:'smooth'});
+  }catch(e){
+    console.error(e);
+    btn.disabled = false; btn.textContent = T[lang].submit;
+    showErr(T[lang].sendFail);
+  }
+}
+</script>
+</body>
+</html>
