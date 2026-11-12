@@ -99,6 +99,57 @@
     .cta .small { font-size: 13px; margin: 18px auto 0; opacity: 0.75; }
     .cta .small a { color: #C9A84C; }
 
+    .nom-pill {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 22px;
+      background: #C8102E; color: #fff; text-decoration: none; font-weight: 700; font-size: 14px;
+      padding: 10px 18px; border-radius: 999px;
+    }
+    .nom-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    .nominate { background: #fff; border-radius: 16px; padding: 34px 30px; border-top: 5px solid #C8102E; scroll-margin-top: 90px; }
+    .nominate h2 { border: none; padding: 0; margin-bottom: 8px; font-size: 26px; }
+    .nominate .intro { color: #555; font-size: 15px; margin-bottom: 24px; }
+    .mode { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 26px; }
+    .mode label {
+      display: block; cursor: pointer; border: 2px solid rgba(26,26,26,0.12); border-radius: 12px;
+      padding: 14px 16px; font-weight: 700; font-size: 15px; background: #FAF7F2;
+    }
+    .mode label small { display: block; font-weight: 500; font-size: 13px; color: #666; margin-top: 2px; }
+    .mode input { position: absolute; opacity: 0; pointer-events: none; }
+    .mode input:checked + label { border-color: #C8102E; background: #fff; box-shadow: 0 0 0 3px rgba(200,16,46,0.1); }
+    .mode input:focus-visible + label { outline: 2px solid #1A1A1A; outline-offset: 2px; }
+    fieldset { border: none; margin-bottom: 22px; }
+    legend { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #C9A84C; margin-bottom: 12px; }
+    .field { margin-bottom: 14px; }
+    .field > label, .field > .lbl { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .field .opt { font-weight: 400; color: #888; font-size: 13px; }
+    .field input[type=text], .field input[type=email], .field input[type=url], .field select, .field textarea {
+      width: 100%; font: inherit; font-size: 15px; padding: 11px 13px; border-radius: 9px;
+      border: 1px solid rgba(26,26,26,0.2); background: #fff; color: #1A1A1A;
+    }
+    .field textarea { min-height: 110px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: #C8102E; box-shadow: 0 0 0 3px rgba(200,16,46,0.12); }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; }
+    .checks label, .consent label { display: flex; gap: 9px; align-items: flex-start; font-size: 14px; font-weight: 500; cursor: pointer; }
+    .checks input, .consent input { margin-top: 4px; accent-color: #C8102E; }
+    .consent { background: #FAF7F2; border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; }
+    .hidden { display: none !important; }
+    .submit-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .submit-btn {
+      background: #C8102E; color: #fff; border: none; font: inherit; font-weight: 700; font-size: 15px;
+      padding: 14px 28px; border-radius: 10px; cursor: pointer;
+    }
+    .submit-btn:hover { background: #a50d26; }
+    .submit-btn:disabled { opacity: 0.6; cursor: default; }
+    .form-err { color: #C8102E; font-size: 14px; font-weight: 600; }
+    .form-note { font-size: 13px; color: #777; margin-top: 16px; }
+    .done { text-align: center; padding: 20px 0; }
+    .done .check { width: 56px; height: 56px; border-radius: 50%; background: #2D6A4F; color: #fff; font-size: 28px; line-height: 56px; margin: 0 auto 14px; }
+    .done h3 { font-size: 22px; margin-bottom: 8px; }
+    .done p { color: #555; max-width: 520px; margin: 0 auto; }
+
     footer { background: #1A1A1A; color: rgba(245,240,232,0.7); padding: 32px 24px; text-align: center; }
     footer a { color: #C9A84C; text-decoration: none; }
 
@@ -109,6 +160,8 @@
       .beat { grid-template-columns: 1fr; gap: 6px; }
       .beat .time { text-align: left; color: #C8102E; }
       .nav-back { display: none; }
+      .mode, .two, .checks { grid-template-columns: 1fr; }
+      .nominate { padding: 26px 20px; }
     }
   </style>
 </head>
@@ -148,6 +201,11 @@
         <span class="sq-only">Bordi Këshillëdhënës i FAME punon ashtu si oda e dikurshme: njerëz me përvojë dhe gjykim të mirë japin këshilla me durim, me kalimin e kohës. Tani kryesisht online, që njerëzit e zënë me punë të ndihmojnë pa shtuar edhe një takim të rregullt në kalendar.</span>
         <span class="en-only">FAME's Board of Advisors works the way the oda always has: people with experience and good judgement giving counsel patiently, over time. Now mostly online, so busy people can help without adding another standing meeting to their calendar.</span>
       </p>
+      <a href="#nominate" class="nom-pill">
+        <span class="dot"></span>
+        <span class="sq-only">Nominimet janë të hapura — propozoni dikë ose veten →</span>
+        <span class="en-only">Nominations are open — nominate someone or yourself →</span>
+      </a>
     </div>
 
     <!-- THE NAME -->
@@ -342,25 +400,167 @@
       </div>
     </section>
 
-    <!-- CTA -->
-    <div class="cta">
+    <!-- NOMINATIONS -->
+    <section class="nominate" id="nominate">
+      <div class="eyebrow">
+        <span class="sq-only">Nominimet janë të hapura</span>
+        <span class="en-only">Nominations are open</span>
+      </div>
       <h2>
-        <span class="sq-only">Ju intereson?</span>
-        <span class="en-only">Interested?</span>
+        <span class="sq-only">Propozoni një këshilltar — ose veten</span>
+        <span class="en-only">Nominate an advisor — or yourself</span>
       </h2>
-      <p>
-        <span class="sq-only">Hapi i parë është një bisedë 30-minutëshe me video me Behar Shalën dhe Joseph Fordin — kryesisht për të dëgjuar punën dhe pikëpamjet tuaja, dhe për të parë nëse përputhemi nga të dyja anët.</span>
-        <span class="en-only">The first step is a 30-minute video conversation with Behar Shala and Joseph Ford — mostly to listen to your own work and perspective, and to see whether the fit is right on both sides.</span>
+      <p class="intro">
+        <span class="sq-only">Po e ndërtojmë Odën përmes njerëzve që e njohin punën tonë. Nëse njihni dikë që i përket këtu, na tregoni për të. Nëse mendoni se i përkisni vetë, propozoni veten — vetënominimet janë po aq të mirëpritura. Behar Shala dhe Joseph Ford e lexojnë çdo nominim.</span>
+        <span class="en-only">We are building the Oda through people who know our work. If you know someone who belongs here, tell us about them. If you think you belong here yourself, nominate yourself — self-nominations are just as welcome. Behar Shala and Joseph Ford read every nomination.</span>
       </p>
-      <a class="btn" href="mailto:founders@fame-kosovo.org?subject=FAME%20Oda">
-        <span class="sq-only">Na shkruani →</span>
-        <span class="en-only">Write to us →</span>
-      </a>
-      <p class="small">
-        <span class="sq-only">Njihni dikë që i përket Odës? <a href="mailto:founders@fame-kosovo.org?subject=FAME%20Oda%20%E2%80%94%20nominim">Na tregoni për të.</a></span>
-        <span class="en-only">Know someone who belongs in the Oda? <a href="mailto:founders@fame-kosovo.org?subject=FAME%20Oda%20%E2%80%94%20nomination">Tell us about them.</a></span>
-      </p>
-    </div>
+
+      <form id="nom-form" novalidate>
+        <div class="mode" role="radiogroup">
+          <div>
+            <input type="radio" name="nomination_type" id="mode-other" value="Nomination of someone else" checked>
+            <label for="mode-other">
+              <span class="sq-only">Propozoj dikë tjetër</span><span class="en-only">I'm nominating someone</span>
+              <small><span class="sq-only">Një koleg, mik ose mentor</span><span class="en-only">A colleague, friend or mentor</span></small>
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="nomination_type" id="mode-self" value="Self-nomination">
+            <label for="mode-self">
+              <span class="sq-only">Propozoj veten</span><span class="en-only">I'm nominating myself</span>
+              <small><span class="sq-only">Dëshiroj të bashkohem me Odën</span><span class="en-only">I'd like to join the Oda</span></small>
+            </label>
+          </div>
+        </div>
+
+        <!-- Nominator (only when nominating someone else) -->
+        <fieldset id="nominator-block">
+          <legend><span class="sq-only">Për ju</span><span class="en-only">About you</span></legend>
+          <div class="two">
+            <div class="field">
+              <label for="nominator_name"><span class="sq-only">Emri juaj</span><span class="en-only">Your name</span></label>
+              <input type="text" id="nominator_name" name="nominator_name" autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="nominator_email"><span class="sq-only">Email-i juaj</span><span class="en-only">Your email</span></label>
+              <input type="email" id="nominator_email" name="nominator_email" autocomplete="email">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Nominee -->
+        <fieldset>
+          <legend>
+            <span class="other-only"><span class="sq-only">Për personin që propozoni</span><span class="en-only">About the person you're nominating</span></span>
+            <span class="self-only hidden"><span class="sq-only">Për ju</span><span class="en-only">About you</span></span>
+          </legend>
+          <div class="two">
+            <div class="field">
+              <label for="nominee_name">
+                <span class="other-only"><span class="sq-only">Emri i tyre</span><span class="en-only">Their name</span></span>
+                <span class="self-only hidden"><span class="sq-only">Emri juaj</span><span class="en-only">Your name</span></span>
+              </label>
+              <input type="text" id="nominee_name" name="nominee_name">
+            </div>
+            <div class="field">
+              <label for="nominee_email">
+                <span class="other-only"><span class="sq-only">Email-i i tyre</span><span class="en-only">Their email</span> <span class="opt"><span class="sq-only">(nëse e dini)</span><span class="en-only">(if you know it)</span></span></span>
+                <span class="self-only hidden"><span class="sq-only">Email-i juaj</span><span class="en-only">Your email</span></span>
+              </label>
+              <input type="email" id="nominee_email" name="nominee_email">
+            </div>
+          </div>
+          <div class="two">
+            <div class="field">
+              <label for="nominee_role"><span class="sq-only">Roli dhe organizata</span><span class="en-only">Role and organization</span></label>
+              <input type="text" id="nominee_role" name="nominee_role">
+            </div>
+            <div class="field">
+              <label for="nominee_location"><span class="sq-only">Ku jetojnë</span><span class="en-only">Where based</span></label>
+              <select id="nominee_location" name="nominee_location">
+                <option value="" data-sq="Zgjidhni…" data-en="Choose…">Zgjidhni…</option>
+                <option value="Kosovo" data-sq="Kosovë" data-en="Kosovo">Kosovë</option>
+                <option value="Albania" data-sq="Shqipëri" data-en="Albania">Shqipëri</option>
+                <option value="North Macedonia / Montenegro / Serbia (Albanian communities)" data-sq="Maqedoni e Veriut / Mal i Zi / Luginë e Preshevës" data-en="North Macedonia / Montenegro / Preševo Valley">Maqedoni e Veriut / Mal i Zi / Luginë e Preshevës</option>
+                <option value="Diaspora — Europe" data-sq="Diaspora — Evropë" data-en="Diaspora — Europe">Diaspora — Evropë</option>
+                <option value="Diaspora — North America" data-sq="Diaspora — Amerikë e Veriut" data-en="Diaspora — North America">Diaspora — Amerikë e Veriut</option>
+                <option value="Elsewhere" data-sq="Diku tjetër" data-en="Elsewhere">Diku tjetër</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="nominee_link">
+              <span class="sq-only">LinkedIn ose faqe interneti</span><span class="en-only">LinkedIn or website</span>
+              <span class="opt"><span class="sq-only">(opsionale)</span><span class="en-only">(optional)</span></span>
+            </label>
+            <input type="url" id="nominee_link" name="nominee_link" placeholder="https://">
+          </div>
+          <div class="field">
+            <span class="lbl"><span class="sq-only">Fushat e përvojës</span><span class="en-only">Areas of experience</span> <span class="opt"><span class="sq-only">(zgjidhni të gjitha që vlejnë)</span><span class="en-only">(choose all that apply)</span></span></span>
+            <div class="checks">
+              <label><input type="checkbox" name="experience" value="Education & youth development"><span><span class="sq-only">Arsim dhe zhvillim i të rinjve</span><span class="en-only">Education &amp; youth development</span></span></label>
+              <label><input type="checkbox" name="experience" value="Social entrepreneurship"><span><span class="sq-only">Sipërmarrje sociale</span><span class="en-only">Social entrepreneurship</span></span></label>
+              <label><input type="checkbox" name="experience" value="Public health & child wellbeing"><span><span class="sq-only">Shëndet publik dhe mirëqenia e fëmijëve</span><span class="en-only">Public health &amp; child wellbeing</span></span></label>
+              <label><input type="checkbox" name="experience" value="Technology & data privacy"><span><span class="sq-only">Teknologji dhe privatësi e të dhënave</span><span class="en-only">Technology &amp; data privacy</span></span></label>
+              <label><input type="checkbox" name="experience" value="Law & governance"><span><span class="sq-only">Drejtësi dhe qeverisje</span><span class="en-only">Law &amp; governance</span></span></label>
+              <label><input type="checkbox" name="experience" value="Fundraising & partnerships"><span><span class="sq-only">Mbledhje fondesh dhe partneritete</span><span class="en-only">Fundraising &amp; partnerships</span></span></label>
+              <label><input type="checkbox" name="experience" value="Communications"><span><span class="sq-only">Komunikim</span><span class="en-only">Communications</span></span></label>
+              <label><input type="checkbox" name="experience" value="Albanian diaspora life"><span><span class="sq-only">Jeta e diasporës shqiptare</span><span class="en-only">Albanian diaspora life</span></span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="why">
+              <span class="other-only"><span class="sq-only">Pse i përkasin Odës?</span><span class="en-only">Why do they belong in the Oda?</span></span>
+              <span class="self-only hidden"><span class="sq-only">Pse i përkisni Odës?</span><span class="en-only">Why do you belong in the Oda?</span></span>
+            </label>
+            <textarea id="why" name="why"></textarea>
+          </div>
+          <div class="field other-only">
+            <label for="nominee_aware">
+              <span class="sq-only">A e dinë që po i propozoni?</span><span class="en-only">Do they know you're nominating them?</span>
+            </label>
+            <select id="nominee_aware" name="nominee_aware">
+              <option value="" data-sq="Zgjidhni…" data-en="Choose…">Zgjidhni…</option>
+              <option value="Yes" data-sq="Po" data-en="Yes">Po</option>
+              <option value="No — FAME may contact them and mention my name" data-sq="Jo — FAME mund t'i kontaktojë dhe të përmendë emrin tim" data-en="No — FAME may contact them and mention my name">Jo — FAME mund t'i kontaktojë dhe të përmendë emrin tim</option>
+              <option value="No — please don't mention my name" data-sq="Jo — ju lutem mos e përmendni emrin tim" data-en="No — please don't mention my name">Jo — ju lutem mos e përmendni emrin tim</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <div class="consent">
+          <label>
+            <input type="checkbox" id="consent" name="consent" value="yes">
+            <span>
+              <span class="sq-only">Pranoj që FAME t'i ruajë këto të dhëna vetëm për të shqyrtuar këtë nominim. Ato nuk ndahen dhe nuk publikohen.</span>
+              <span class="en-only">I agree that FAME may keep these details only to consider this nomination. They are not shared or published.</span>
+            </span>
+          </label>
+        </div>
+
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="submit-row">
+          <button type="submit" class="submit-btn" id="nom-submit">
+            <span class="sq-only">Dërgo nominimin →</span><span class="en-only">Send nomination →</span>
+          </button>
+          <span class="form-err" id="nom-err" role="alert"></span>
+        </div>
+        <p class="form-note">
+          <span class="sq-only">Hapi i ardhshëm, nëse përputhemi, është një bisedë 30-minutëshe me video me Behar Shalën dhe Joseph Fordin. Preferoni email-in? Shkruani te <a href="mailto:founders@fame-kosovo.org?subject=FAME%20Oda">founders@fame-kosovo.org</a>.</span>
+          <span class="en-only">If the fit looks right, the next step is a 30-minute video conversation with Behar Shala and Joseph Ford. Prefer email? Write to <a href="mailto:founders@fame-kosovo.org?subject=FAME%20Oda">founders@fame-kosovo.org</a>.</span>
+        </p>
+      </form>
+
+      <div class="done hidden" id="nom-done">
+        <div class="check">✓</div>
+        <h3><span class="sq-only">Faleminderit!</span><span class="en-only">Thank you!</span></h3>
+        <p>
+          <span class="sq-only">Nominimi juaj arriti. Behar dhe Joseph do ta lexojnë dhe do t'ju shkruajnë.</span>
+          <span class="en-only">Your nomination has arrived. Behar and Joseph will read it and be in touch.</span>
+        </p>
+      </div>
+    </section>
 
   </main>
 
@@ -381,11 +581,94 @@
       document.getElementById('lang-sq-btn').classList.toggle('active', lang === 'sq');
       document.getElementById('lang-en-btn').classList.toggle('active', lang === 'en');
       try { localStorage.setItem('fame-lang', lang); } catch (e) {}
+      document.querySelectorAll('option[data-' + lang + ']').forEach(function (o) { o.textContent = o.dataset[lang]; });
+      if (document.getElementById('nom-err').textContent) validate();
     }
+
+    // ---------- nominations ----------
+    var FORMSPREE = 'https://formspree.io/f/meeywdkb'; // same form as apply.html / discern.html
+    var form = document.getElementById('nom-form');
+    var MSG = {
+      sq: { name: 'Ju lutem shkruani emrin.', email: 'Ju lutem shkruani një email të vlefshëm.', why: 'Ju lutem na tregoni pak pse.', consent: 'Ju lutem jepni pëlqimin për të vazhduar.', fail: 'Dërgimi dështoi. Provoni përsëri ose shkruani te founders@fame-kosovo.org.', sending: 'Duke dërguar…' },
+      en: { name: 'Please enter a name.', email: 'Please enter a valid email.', why: 'Please tell us a little about why.', consent: 'Please give consent to continue.', fail: 'Sending failed. Please try again or write to founders@fame-kosovo.org.', sending: 'Sending…' }
+    };
+    function lang() { return document.documentElement.lang === 'en' ? 'en' : 'sq'; }
+    function isSelf() { return document.getElementById('mode-self').checked; }
+    function okEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+    function val(id) { return document.getElementById(id).value.trim(); }
+
+    function applyMode() {
+      var self = isSelf();
+      document.getElementById('nominator-block').classList.toggle('hidden', self);
+      document.querySelectorAll('.other-only').forEach(function (e) { e.classList.toggle('hidden', self); });
+      document.querySelectorAll('.self-only').forEach(function (e) { e.classList.toggle('hidden', !self); });
+      document.getElementById('nom-err').textContent = '';
+    }
+    document.getElementById('mode-other').addEventListener('change', applyMode);
+    document.getElementById('mode-self').addEventListener('change', applyMode);
+
+    function validate() {
+      var m = MSG[lang()], self = isSelf(), err = '';
+      if (!self && !val('nominator_name')) err = m.name;
+      else if (!self && !okEmail(val('nominator_email'))) err = m.email;
+      else if (!val('nominee_name')) err = m.name;
+      else if (self && !okEmail(val('nominee_email'))) err = m.email;
+      else if (!self && val('nominee_email') && !okEmail(val('nominee_email'))) err = m.email;
+      else if (!val('why')) err = m.why;
+      else if (!document.getElementById('consent').checked) err = m.consent;
+      document.getElementById('nom-err').textContent = err;
+      return !err;
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!validate()) return;
+      var self = isSelf(), btn = document.getElementById('nom-submit'), label = btn.innerHTML;
+      var exp = Array.prototype.map.call(form.querySelectorAll('input[name=experience]:checked'), function (c) { return c.value; });
+      var payload = {
+        _subject: 'FAME Oda — ' + (self ? 'self-nomination' : 'nomination') + ': ' + val('nominee_name'),
+        form: 'oda-nomination-v1',
+        nomination_type: self ? 'Self-nomination' : 'Nomination of someone else',
+        language: lang(),
+        nominee_name: val('nominee_name'),
+        nominee_email: val('nominee_email'),
+        nominee_role: val('nominee_role'),
+        nominee_location: val('nominee_location'),
+        nominee_link: val('nominee_link'),
+        experience: exp.join('; '),
+        why: val('why'),
+        consent: 'yes',
+        _gotcha: form._gotcha.value
+      };
+      if (!self) {
+        payload.nominator_name = val('nominator_name');
+        payload.nominator_email = val('nominator_email');
+        payload.nominee_aware = val('nominee_aware');
+      }
+      payload._replyto = self ? payload.nominee_email : payload.nominator_email;
+      btn.disabled = true; btn.textContent = MSG[lang()].sending;
+      try {
+        var res = await fetch(FORMSPREE, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        form.classList.add('hidden');
+        document.getElementById('nom-done').classList.remove('hidden');
+        document.getElementById('nominate').scrollIntoView({ behavior: 'smooth' });
+      } catch (err) {
+        console.error(err);
+        btn.disabled = false; btn.innerHTML = label;
+        document.getElementById('nom-err').textContent = MSG[lang()].fail;
+      }
+    });
+
     try {
       var saved = localStorage.getItem('fame-lang');
       if (saved === 'en') setLang('en');
     } catch (e) {}
+    if (location.hash === '#nominate-self') { document.getElementById('mode-self').checked = true; applyMode(); }
   </script>
 </body>
 </html>
