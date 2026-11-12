@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oda e FAME / The FAME Oda — Board of Advisors</title>
+  <meta name="description" content="The FAME Oda: an always-open room for advice. FAME's Board of Advisors works mostly online, in small contributions that add up over time.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #F5F0E8; color: #1A1A1A; line-height: 1.65;
+    }
+    html[lang="sq"] .en-only { display: none; }
+    html[lang="en"] .sq-only { display: none; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(245, 240, 232, 0.96); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(26, 26, 26, 0.08); padding: 16px 24px;
+    }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-brand {
+      color: #C8102E; font-weight: 900; font-size: 22px; letter-spacing: 5px;
+      text-decoration: none; display: flex; align-items: center; gap: 10px;
+    }
+    .nav-brand img { height: 32px; }
+    .nav-actions { display: flex; gap: 18px; align-items: center; }
+    .nav-back { color: #666; font-size: 14px; text-decoration: none; }
+    .nav-back:hover { color: #1A1A1A; }
+    .lang-toggle { display: flex; gap: 4px; background: #fff; border: 1px solid rgba(26,26,26,0.12); border-radius: 8px; padding: 4px; }
+    .lang-toggle button {
+      background: transparent; border: none; padding: 6px 12px; cursor: pointer;
+      color: #666; border-radius: 5px; font-weight: 600; font-size: 12px;
+    }
+    .lang-toggle button.active { background: #1A1A1A; color: #fff; }
+
+    main { max-width: 920px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    .page-header { margin-bottom: 56px; padding-bottom: 36px; border-bottom: 2px solid rgba(26,26,26,0.08); text-align: center; }
+    .page-header img.eagle { height: 96px; margin-bottom: 16px; }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #C9A84C; margin-bottom: 8px; }
+    .page-header h1 { font-size: 42px; letter-spacing: -1px; margin-bottom: 16px; line-height: 1.15; }
+    .page-header .lead { font-size: 17px; color: #555; max-width: 660px; margin: 0 auto; }
+
+    section { margin-bottom: 56px; }
+    section h2 { font-size: 24px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(26,26,26,0.1); }
+    section p { margin-bottom: 14px; font-size: 15px; }
+
+    .name-card {
+      background: #1A1A1A; color: #F5F0E8; border-radius: 16px; padding: 32px 30px;
+      border-left: 5px solid #C8102E;
+    }
+    .name-card p { font-size: 16px; }
+    .name-card .word { color: #C9A84C; font-style: italic; font-weight: 700; }
+    .name-card .open { margin-top: 18px; margin-bottom: 0; padding-top: 16px; border-top: 1px solid rgba(245,240,232,0.15); font-weight: 600; }
+    .loop { margin-top: 18px; background: #fff; border-radius: 14px; padding: 22px 24px; border-top: 4px solid #C9A84C; }
+    .loop .k { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+    .loop p { margin: 0; font-size: 16px; font-weight: 600; }
+
+    .rhythm { display: grid; gap: 12px; }
+    .beat {
+      display: grid; grid-template-columns: 200px 1fr 150px; gap: 18px; align-items: center;
+      background: #fff; padding: 18px 22px; border-radius: 12px; border-left: 3px solid #C8102E;
+    }
+    .beat h3 { font-size: 16px; margin: 0; line-height: 1.3; }
+    .beat h3 small { display: block; font-size: 11px; font-weight: 600; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+    .beat p { margin: 0; font-size: 14px; color: #444; }
+    .beat .time { font-size: 13px; font-weight: 700; color: #1A1A1A; text-align: right; }
+    .rhythm-note { margin-top: 16px; font-size: 15px; font-weight: 600; text-align: center; color: #1A1A1A; }
+
+    .commit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .commit { background: #fff; padding: 22px 22px; border-radius: 14px; border-top: 4px solid #2D6A4F; }
+    .commit h3 { font-size: 17px; margin-bottom: 6px; }
+    .commit p { font-size: 14px; color: #555; margin: 0; }
+
+    ul.seek { list-style: none; }
+    ul.seek li { background: #fff; padding: 16px 20px 16px 46px; border-radius: 12px; margin-bottom: 10px; position: relative; font-size: 15px; }
+    ul.seek li::before { content: ""; position: absolute; left: 20px; top: 24px; width: 10px; height: 10px; border-radius: 50%; background: #C8102E; }
+
+    .fact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .fact { background: #fff; padding: 18px 22px; border-radius: 10px; border-left: 3px solid #C9A84C; }
+    .fact .k { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+    .fact .v { font-size: 15px; }
+
+    .cta {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2a2a2a 100%);
+      color: #fff; padding: 40px 32px; border-radius: 16px; text-align: center;
+    }
+    .cta h2 { color: #C9A84C; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; border: none; padding: 0; margin-bottom: 14px; }
+    .cta p { font-size: 16px; max-width: 600px; margin: 0 auto 22px; opacity: 0.9; }
+    .cta .btn {
+      display: inline-block; background: #C8102E; color: #fff; text-decoration: none;
+      font-weight: 700; padding: 14px 26px; border-radius: 10px; font-size: 15px;
+    }
+    .cta .btn:hover { background: #a50d26; }
+    .cta .small { font-size: 13px; margin: 18px auto 0; opacity: 0.75; }
+    .cta .small a { color: #C9A84C; }
+
+    footer { background: #1A1A1A; color: rgba(245,240,232,0.7); padding: 32px 24px; text-align: center; }
+    footer a { color: #C9A84C; text-decoration: none; }
+
+    @media (max-width: 760px) {
+      main { padding: 40px 20px; }
+      .page-header h1 { font-size: 30px; }
+      .commit-grid, .fact-grid { grid-template-columns: 1fr; }
+      .beat { grid-template-columns: 1fr; gap: 6px; }
+      .beat .time { text-align: left; color: #C8102E; }
+      .nav-back { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="/fame_eagle.png" alt="FAME">
+        <span>FAME</span>
+      </a>
+      <div class="nav-actions">
+        <a href="/" class="nav-back">
+          <span class="sq-only">← Faqja kryesore</span>
+          <span class="en-only">← Home</span>
+        </a>
+        <div class="lang-toggle">
+          <button onclick="setLang('sq')" id="lang-sq-btn" class="active">SQ</button>
+          <button onclick="setLang('en')" id="lang-en-btn">EN</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <div class="page-header">
+      <img src="/fame_eagle.png" alt="FAME eagle" class="eagle">
+      <div class="eyebrow">
+        <span class="sq-only">Oda e FAME · Bordi Këshillëdhënës</span>
+        <span class="en-only">The FAME Oda · Board of Advisors</span>
+      </div>
+      <h1>
+        <span class="sq-only">Një odë gjithmonë e hapur për këshilla</span>
+        <span class="en-only">An always-open room for advice</span>
+      </h1>
+      <p class="lead">
+        <span class="sq-only">Bordi Këshillëdhënës i FAME punon ashtu si oda e dikurshme: njerëz me përvojë dhe gjykim të mirë japin këshilla me durim, me kalimin e kohës. Tani kryesisht online, që njerëzit e zënë me punë të ndihmojnë pa shtuar edhe një takim të rregullt në kalendar.</span>
+        <span class="en-only">FAME's Board of Advisors works the way the oda always has: people with experience and good judgement giving counsel patiently, over time. Now mostly online, so busy people can help without adding another standing meeting to their calendar.</span>
+      </p>
+    </div>
+
+    <!-- THE NAME -->
+    <section>
+      <h2>
+        <span class="sq-only">Ideja pas emrit</span>
+        <span class="en-only">The idea behind the name</span>
+      </h2>
+      <div class="name-card">
+        <p>
+          <span class="sq-only">Në traditën shqiptare, <span class="word">oda</span> është dhoma e mysafirëve ku njerëzit mblidheshin për t'u këshilluar, për të zgjidhur çështje dhe për të dhënë fjalën e tyre — me durim, gjatë shumë mbrëmjeve, jo në një mbledhje të vetme zyrtare.</span>
+          <span class="en-only">In Albanian tradition, the <span class="word">oda</span> is the guest room where people gathered to deliberate, settle questions and give counsel — patiently, over many evenings, rather than in one formal sitting.</span>
+        </p>
+        <p style="margin-bottom:0;">
+          <span class="sq-only">Oda e FAME e sjell këtë ide në mënyrën se si mund të punojë sot një bord këshillëdhënës: një odë gjithmonë e hapur, ku këshilltarët kontribuojnë kur kanë diçka për të thënë, dhe ku kontributet ndërtohen mbi njëra-tjetrën.</span>
+          <span class="en-only">The FAME Oda carries that idea into how an advisory board can work today: an always-open room where advisors contribute when they have something to say, and where those contributions build on each other.</span>
+        </p>
+        <p class="open">
+          <span class="sq-only">Oda jonë është e hapur për gra dhe burra, në Kosovë dhe në mbarë diasporën.</span>
+          <span class="en-only">Our Oda is open to women and men, in Kosovo and across the diaspora.</span>
+        </p>
+      </div>
+      <div class="loop">
+        <div class="k">Advisor-in-the-Loop</div>
+        <p>
+          <span class="sq-only">Inteligjenca artificiale organizon, kujton dhe përmbledh. Njerëzit mendojnë dhe vendosin.</span>
+          <span class="en-only">AI does the organizing, remembering and summarizing. People do the thinking and the deciding.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section>
+      <h2>
+        <span class="sq-only">Si funksionon</span>
+        <span class="en-only">How it works</span>
+      </h2>
+      <p>
+        <span class="sq-only">Shumica e bordeve këshillëdhënëse takohen disa herë në vit, dhe fija humbet deri në takimin e radhës. Oda kërkon kontribute të shkurtra e të rregullta, që ruhen, lidhen me njëra-tjetrën dhe marrin përgjigje.</span>
+        <span class="en-only">Most advisory boards meet a few times a year, and the thread is lost until the next call. The Oda asks for short, regular contributions that are kept, connected and answered.</span>
+      </p>
+      <div class="rhythm">
+        <div class="beat">
+          <h3><span class="sq-only">Pulsi mujor</span><span class="en-only">Monthly Pulse</span></h3>
+          <p>
+            <span class="sq-only">Tri deri në pesë pyetje për sfidat që FAME ka përpara tani, me email ose me një formular të shkurtër.</span>
+            <span class="en-only">Three to five questions about what FAME is facing right now, by email or a short form.</span>
+          </p>
+          <div class="time"><span class="sq-only">10–15 minuta</span><span class="en-only">10–15 minutes</span></div>
+        </div>
+        <div class="beat">
+          <h3><span class="sq-only">Muri i ideve</span><span class="en-only">The Idea Wall</span><small><span class="sq-only">në çdo kohë</span><span class="en-only">anytime</span></small></h3>
+          <p>
+            <span class="sq-only">Lini një ide, një lidhje, një kontakt, një shqetësim ose një pyetje — thjesht duke iu përgjigjur çdo emaili të Odës.</span>
+            <span class="en-only">Drop an idea, a link, a contact, a concern or a question — just by replying to any Oda email.</span>
+          </p>
+          <div class="time"><span class="sq-only">Sa të doni</span><span class="en-only">As you like</span></div>
+        </div>
+        <div class="beat">
+          <h3><span class="sq-only">Pyet Odën</span><span class="en-only">Ask the Oda</span><small><span class="sq-only">sipas nevojës</span><span class="en-only">as needed</span></small></h3>
+          <p>
+            <span class="sq-only">Një pyetje e veçantë për një ose dy këshilltarë, përvoja e të cilëve i përshtatet, me afat shtatë ditë. Është gjithmonë në rregull të thoni “jo këtë herë”.</span>
+            <span class="en-only">A specific question sent to the one or two advisors whose experience fits it, with a seven-day window. Saying “not this one” is always fine.</span>
+          </p>
+          <div class="time"><span class="sq-only">20–30 minuta, disa herë në vit</span><span class="en-only">20–30 minutes, a few times a year</span></div>
+        </div>
+        <div class="beat">
+          <h3><span class="sq-only">Përmbledhja tremujore</span><span class="en-only">Quarterly Oda Brief</span></h3>
+          <p>
+            <span class="sq-only">Çfarë thanë këshilltarët, çfarë vendosi FAME dhe çfarë u bë me secilën ide. Lexojeni, reagoni, korrigjoni.</span>
+            <span class="en-only">What advisors said, what FAME decided, and what became of each idea. Read it, react, correct.</span>
+          </p>
+          <div class="time"><span class="sq-only">Rreth 20 minuta</span><span class="en-only">About 20 minutes</span></div>
+        </div>
+        <div class="beat">
+          <h3><span class="sq-only">Takimi vjetor</span><span class="en-only">Annual gathering</span><small><span class="sq-only">opsional</span><span class="en-only">optional</span></small></h3>
+          <p>
+            <span class="sq-only">Një bisedë e drejtpërdrejtë, online ose në Kosovë.</span>
+            <span class="en-only">One live conversation, online or in Kosovo.</span>
+          </p>
+          <div class="time"><span class="sq-only">Rreth 90 minuta</span><span class="en-only">About 90 minutes</span></div>
+        </div>
+      </div>
+      <p class="rhythm-note">
+        <span class="sq-only">Më së shumti dy ose tri orë në muaj — dhe shumë më pak në muajt e qetë.</span>
+        <span class="en-only">Two or three hours a month at most — and much less in quiet months.</span>
+      </p>
+    </section>
+
+    <!-- COMMITMENTS -->
+    <section>
+      <h2>
+        <span class="sq-only">Zotimet tona ndaj këshilltarëve</span>
+        <span class="en-only">Our commitments to advisors</span>
+      </h2>
+      <div class="commit-grid">
+        <div class="commit">
+          <h3><span class="sq-only">Njerëzit vendosin</span><span class="en-only">People decide</span></h3>
+          <p>
+            <span class="sq-only">Bashkëthemeluesit Behar Shala dhe Joseph Ford e shqyrtojnë çdo përmbledhje të krijuar me ndihmën e IA-së para se të ndahet ose të veprohet sipas saj.</span>
+            <span class="en-only">Co-founders Behar Shala and Joseph Ford review every AI-assisted summary before it is shared or acted on.</span>
+          </p>
+        </div>
+        <div class="commit">
+          <h3><span class="sq-only">Fjala juaj mbetet e juaja</span><span class="en-only">Your words stay yours</span></h3>
+          <p>
+            <span class="sq-only">Çdo kontribut ruhet me datën dhe emrin e autorit, dhe ju mund të korrigjoni mënyrën si është përmbledhur.</span>
+            <span class="en-only">Every contribution is kept with its date and author, and you can correct how your input has been summarized.</span>
+          </p>
+        </div>
+        <div class="commit">
+          <h3><span class="sq-only">Asnjë e dhënë për fëmijët</span><span class="en-only">No children's data</span></h3>
+          <p>
+            <span class="sq-only">Asnjë e dhënë për nxënës, familje apo shëndet nuk hyn kurrë në Odë. Këshilltarët punojnë vetëm me plane, pyetje dhe rezultate të përgjithshme.</span>
+            <span class="en-only">No student, family or health data ever enters the Oda. Advisors work with plans, questions and aggregate results only.</span>
+          </p>
+        </div>
+        <div class="commit">
+          <h3><span class="sq-only">Asgjë pa pëlqimin tuaj</span><span class="en-only">Nothing without your consent</span></h3>
+          <p>
+            <span class="sq-only">Kontributet e këshilltarëve nuk publikohen dhe nuk citohen publikisht pa pëlqimin e tyre.</span>
+            <span class="en-only">Advisor contributions are never published or quoted publicly without the advisor's consent.</span>
+          </p>
+        </div>
+      </div>
+      <div class="commit" style="margin-top:14px; border-top-color:#C8102E;">
+        <h3><span class="sq-only">Çdo ide merr përgjigje</span><span class="en-only">Every idea gets an answer</span></h3>
+        <p>
+          <span class="sq-only">Çdo përmbledhje tremujore rendit çdo ide të marrë dhe çfarë ndodhi me të: u miratua, u la për më vonë, ose nuk u pranua — me arsyen përkatëse.</span>
+          <span class="en-only">Every Quarterly Brief lists each idea received and what happened to it: adopted, parked for later, or declined — with the reason.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- WHO WE'RE LOOKING FOR -->
+    <section>
+      <h2>
+        <span class="sq-only">Kë po kërkojmë</span>
+        <span class="en-only">Who we are looking for</span>
+      </h2>
+      <ul class="seek">
+        <li>
+          <span class="sq-only">Përvojë në arsim dhe zhvillimin e të rinjve, sipërmarrje sociale, shëndet publik dhe mirëqenien e fëmijëve, teknologji dhe privatësi të të dhënave, drejtësi dhe qeverisje, mbledhje fondesh dhe partneritete, komunikim, ose jetën e diasporës shqiptare.</span>
+          <span class="en-only">Experience in education and youth development, social entrepreneurship, public health and child wellbeing, technology and data privacy, law and governance, fundraising and partnerships, communications, or the life of the Albanian diaspora.</span>
+        </li>
+        <li>
+          <span class="sq-only">Gjykim dhe sinqeritet më shumë se kohë. I çmojmë veçanërisht këshilltarët që na thonë kur gabojmë.</span>
+          <span class="en-only">Judgement and candour more than time. We especially value advisors who will tell us when we are wrong.</span>
+        </li>
+        <li>
+          <span class="sq-only">Një lidhje me Kosovën ose me botën shqiptare është e mirëpritur, por jo e domosdoshme.</span>
+          <span class="en-only">A connection to Kosovo or the Albanian world is welcome, not required.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- THE ROLE -->
+    <section>
+      <h2>
+        <span class="sq-only">Roli, qartë</span>
+        <span class="en-only">The role, plainly</span>
+      </h2>
+      <div class="fact-grid">
+        <div class="fact">
+          <div class="k"><span class="sq-only">Këshillëdhënës, jo qeverisës</span><span class="en-only">Advisory, not governing</span></div>
+          <div class="v">
+            <span class="sq-only">I ndarë nga bordi ligjor i FAME. Pa detyrime fiduciare, pa përgjegjësi ligjore, pa vota për çështje qeverisëse.</span>
+            <span class="en-only">Separate from FAME's legal board. No fiduciary duty, no legal liability, no votes on governance matters.</span>
+          </div>
+        </div>
+        <div class="fact">
+          <div class="k"><span class="sq-only">Vullnetar</span><span class="en-only">Voluntary</span></div>
+          <div class="v">
+            <span class="sq-only">Pa pagesë. Pa detyrim për të dhënë apo për të mbledhur fonde — prezantimet janë të mirëpritura, kurrë të pritura.</span>
+            <span class="en-only">Unpaid. No give-or-get fundraising expectation — introductions are welcome, never expected.</span>
+          </div>
+        </div>
+        <div class="fact">
+          <div class="k"><span class="sq-only">Mandati</span><span class="en-only">Term</span></div>
+          <div class="v">
+            <span class="sq-only">Dy vjet fillimisht, i rinovueshëm me marrëveshje të ndërsjellë. Mund të tërhiqeni në çdo kohë.</span>
+            <span class="en-only">An initial two years, renewable by mutual agreement. Step back at any time.</span>
+          </div>
+        </div>
+        <div class="fact">
+          <div class="k"><span class="sq-only">Njohja</span><span class="en-only">Recognition</span></div>
+          <div class="v">
+            <span class="sq-only">Me pëlqimin tuaj, emri juaj shfaqet në këtë faqe. Grupi i parë do të njihet si Këshilltarët Themelues.</span>
+            <span class="en-only">With your consent, you are listed on this site. The first cohort will be recognized as Founding Advisors.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta">
+      <h2>
+        <span class="sq-only">Ju intereson?</span>
+        <span class="en-only">Interested?</span>
+      </h2>
+      <p>
+        <span class="sq-only">Hapi i parë është një bisedë 30-minutëshe me video me Behar Shalën dhe Joseph Fordin — kryesisht për të dëgjuar punën dhe pikëpamjet tuaja, dhe për të parë nëse përputhemi nga të dyja anët.</span>
+        <span class="en-only">The first step is a 30-minute video conversation with Behar Shala and Joseph Ford — mostly to listen to your own work and perspective, and to see whether the fit is right on both sides.</span>
+      </p>
+      <a class="btn" href="mailto:jwford@knome.tech?subject=FAME%20Oda">
+        <span class="sq-only">Na shkruani →</span>
+        <span class="en-only">Write to us →</span>
+      </a>
+      <p class="small">
+        <span class="sq-only">Njihni dikë që i përket Odës? <a href="mailto:jwford@knome.tech?subject=FAME%20Oda%20%E2%80%94%20nominim">Na tregoni për të.</a></span>
+        <span class="en-only">Know someone who belongs in the Oda? <a href="mailto:jwford@knome.tech?subject=FAME%20Oda%20%E2%80%94%20nomination">Tell us about them.</a></span>
+      </p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      <a href="/">fame-kosovo.org</a>
+      · <a href="/apply"><span class="sq-only">Bashkohu</span><span class="en-only">Join FAME</span></a>
+      · <a href="mailto:jwford@knome.tech">jwford@knome.tech</a>
+    </p>
+    <p style="margin-top:14px; font-size:11px; opacity:0.6;">
+      © 2026 FAME — Future Albanian Minds Empowered · A project of Rowboats LLC
+    </p>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById('lang-sq-btn').classList.toggle('active', lang === 'sq');
+      document.getElementById('lang-en-btn').classList.toggle('active', lang === 'en');
+      try { localStorage.setItem('fame-lang', lang); } catch (e) {}
+    }
+    try {
+      var saved = localStorage.getItem('fame-lang');
+      if (saved === 'en') setLang('en');
+    } catch (e) {}
+  </script>
+</body>
+</html>
